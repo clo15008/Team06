@@ -10,10 +10,6 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-/**
- * Created by gclou on 2/27/2018.
- */
-
 public class RecipeLoader {
     public void load()
     {
