@@ -18,6 +18,7 @@ public class RecipeLoader {
                     .header("X-Mashape-Key", "ittcmgzIz1mshRfHT4GfOzDIgM4rp1bdJ59jsnI7kl8mVjgxCw")
                     .header("X-Mashape-Host", "spoonacular-recipe-food-nutrition-v1.p.mashape.com")
                     .asJson();
+            response.getRawBody();
         } catch (UnirestException e) {
             e.printStackTrace();
         }
