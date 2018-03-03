@@ -32,6 +32,8 @@ public class RecipeLoader {
 
             Gson gson = new Gson();
 
+            System.out.println(jsonObject.toString());
+
             // How to serialize multiple recipe objects using fromJason??
             recipe =  gson.fromJson(jsonObject.toString(), Recipe.class);
 
