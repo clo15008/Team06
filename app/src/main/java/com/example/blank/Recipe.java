@@ -11,9 +11,9 @@ public class Recipe {
     private String title;
     private URL imageURL;
     private String imageType;
-    private int usedIngredientCount;
-    private int missedIngredientCount;
-    private int likes;
+    private String usedIngredientCount;
+    private String missedIngredientCount;
+    private String likes;
 
     public String getId() {
         return id;
@@ -29,10 +29,10 @@ public class Recipe {
 
     public String getImageType() { return imageType; }
 
-    public int getUsedIngredientCount() { return usedIngredientCount; }
+    public String getUsedIngredientCount() { return usedIngredientCount; }
 
-    public int getMissedIngredientCount() { return missedIngredientCount; }
+    public String getMissedIngredientCount() { return missedIngredientCount; }
 
-    public int getLikes() { return likes; }
+    public String getLikes() { return likes; }
 
 }
