@@ -30,6 +30,8 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
+
+    //Test version 1 
     ProgressBar pb;
     TextView tv1;
     TextView tv2;
