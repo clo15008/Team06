@@ -3,16 +3,15 @@ package com.example.blank;
 import java.net.URL;
 
 /**
- * Created by gclou on 2/26/2018.
+ * Created by gclou on 3/6/2018.
  */
 
-public class Recipe {
+public class RecipeInfo {
     private String id;
     private String title;
     private URL imageURL;
     private String imageType;
-    private String usedIngredientCount;
-    private String missedIngredientCount;
+    private String instructions;
     private String likes;
 
     public String getId() {
@@ -29,9 +28,7 @@ public class Recipe {
 
     public String getImageType() { return imageType; }
 
-    public String getUsedIngredientCount() { return usedIngredientCount; }
-
-    public String getMissedIngredientCount() { return missedIngredientCount; }
+    public String getInstructions() { return instructions; }
 
     public String getLikes() { return likes; }
 
