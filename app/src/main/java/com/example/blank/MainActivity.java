@@ -33,7 +33,6 @@ public class MainActivity extends AppCompatActivity {
 
     //Test version 1 
     ProgressBar pb;
-    TextView tv1;
     TextView tv2;
     TextView tv3;
 
@@ -44,7 +43,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         pb = (ProgressBar) findViewById(R.id.progressBar);
         pb.setProgress(0);
-        tv1 = (TextView) findViewById(R.id.textView);
         tv2 = (TextView) findViewById(R.id.textView2);
         tv3 = (TextView) findViewById(R.id.textView3);
      }
@@ -134,7 +132,6 @@ public class MainActivity extends AppCompatActivity {
             if(weakref.get() != null){
 
                 weakref.get().pb.setProgress(0);
-                weakref.get().tv1.setText(recipes.get(2).getId());
                 weakref.get().tv2.setText(recipes.get(2).getTitle());
                 weakref.get().tv3.setText(recipes.get(2).getLikes());
                 Toast.makeText(weakref.get(), "Recipe request process is done", Toast.LENGTH_SHORT).show();
