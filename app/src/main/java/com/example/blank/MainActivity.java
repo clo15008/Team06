@@ -29,6 +29,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
+
+
+    //Test version 1 
     ProgressBar pb;
     TextView tv1;
     TextView tv2;
@@ -41,23 +44,23 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         pb = (ProgressBar) findViewById(R.id.progressBar);
         pb.setProgress(0);
+        tv1 = (TextView) findViewById(R.id.textView);
         tv2 = (TextView) findViewById(R.id.textView2);
         tv3 = (TextView) findViewById(R.id.textView3);
-    }
+     }
 
-    public void loadButton(View view) {
+    public void loadButton (View view){
 
         new RequestRecipe(this).execute();
     }
 
-    private static class RequestRecipe extends AsyncTask<URL, Integer, Void> {
+    private static class RequestRecipe extends AsyncTask<URL,Integer,Void> {
 
         private WeakReference<MainActivity> weakref;
         String allLines = "";
         List<Recipe> recipes = new ArrayList<Recipe>();
-        List<String> title = new ArrayList<String>();
 
-        RequestRecipe(MainActivity activity) {
+        RequestRecipe(MainActivity activity){
 
             weakref = new WeakReference<MainActivity>(activity);
         }
@@ -98,10 +101,9 @@ public class MainActivity extends AppCompatActivity {
 
                 JSONArray jsonarray = new JSONArray(allLines);
 
-                for (int j = 0; i < jsonarray.length(); j++) {
+                for(int j=0; i<jsonarray.length(); j++){
                     JSONObject obj = jsonarray.getJSONObject(j);
-                    Recipe recipe = gson.fromJson(obj.toString(), Recipe.class);
-                    title.add(recipe.getTitle());
+                    Recipe recipe = gson.fromJson(obj.toString(),Recipe.class);
                     recipes.add(recipe);
                 }
 
@@ -119,17 +121,17 @@ public class MainActivity extends AppCompatActivity {
             return null;
         }
 
-        protected void onProgressUpdate(Integer... values) {
+        protected void onProgressUpdate(Integer... values){
 
-            if (weakref.get() != null) {
+            if(weakref.get() != null){
 
                 weakref.get().pb.setProgress(values[0]);
             }
         }
 
-        protected void onPostExecute(Void aVoid) {
+        protected void onPostExecute(Void aVoid){
 
-            if (weakref.get() != null) {
+            if(weakref.get() != null){
 
                 weakref.get().pb.setProgress(0);
                 weakref.get().tv1.setText(recipes.get(2).getId());
