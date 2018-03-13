@@ -31,6 +31,8 @@ public class secondActivity extends AppCompatActivity {
     TextView tv2;
     TextView tv3;
 
+    //New Changes 3/13/18
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
