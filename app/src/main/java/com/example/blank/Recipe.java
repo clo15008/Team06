@@ -9,7 +9,7 @@ import java.net.URL;
 public class Recipe {
     private String id;
     private String title;
-    private URL imageURL;
+    private String image;
     private String imageType;
     private String usedIngredientCount;
     private String missedIngredientCount;
@@ -23,8 +23,8 @@ public class Recipe {
         return title;
     }
 
-    public URL getImageURL() {
-        return imageURL;
+    public String getImageURL() {
+        return image;
     }
 
     public String getImageType() { return imageType; }

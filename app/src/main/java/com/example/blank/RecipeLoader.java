@@ -31,7 +31,6 @@ public class RecipeLoader {
             BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
 
             String line = "";
-
             String allLines = "";
 
             do {
