@@ -32,6 +32,7 @@ public class secondActivity extends AppCompatActivity {
     TextView tv3;
 
     //New Changes 3/13/18
+    //Second Activity + First
 
 
     @Override
