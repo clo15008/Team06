@@ -27,7 +27,6 @@ import java.util.List;
 
 public class Main2Activity extends AppCompatActivity {
 
-    ProgressBar pb;
     TextView tv1;
     TextView tv2;
     TextView tv3;
@@ -37,8 +36,7 @@ public class Main2Activity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
-        pb = (ProgressBar) findViewById(R.id.progressBar);
-        pb.setProgress(0);
+        tv1 = (TextView) findViewById(R.id.textView);
         tv2 = (TextView) findViewById(R.id.textView2);
         tv3 = (TextView) findViewById(R.id.textView3);
     }
@@ -114,7 +112,7 @@ public class Main2Activity extends AppCompatActivity {
 
             if(weakref.get() != null){
 
-                weakref.get().pb.setProgress(values[0]);
+                //weakref.get().pb.setProgress(values[0]);
             }
         }
 
@@ -122,8 +120,8 @@ public class Main2Activity extends AppCompatActivity {
 
             if(weakref.get() != null){
 
-                weakref.get().pb.setProgress(0);
-                //weakref.get().tv1.setText(info.get(0).getId());
+                //weakref.get().pb.setProgress(0);
+                //weakref.get().tv1.setText(info.getExtendedIngredients());
                 weakref.get().tv2.setText(info.getTitle());
                 weakref.get().tv3.setText(info.getInstructions());
                 Toast.makeText(weakref.get(), "Recipe request process is done", Toast.LENGTH_SHORT).show();

@@ -13,6 +13,7 @@ public class RecipeInfo {
     private String imageType;
     private String instructions;
     private String likes;
+    //private String extendedIngredients;
 
     public String getId() {
         return id;
@@ -31,5 +32,7 @@ public class RecipeInfo {
     public String getInstructions() { return instructions; }
 
     public String getLikes() { return likes; }
+
+    //public String getExtendedIngredients(){ return extendedIngredients; }
 
 }
