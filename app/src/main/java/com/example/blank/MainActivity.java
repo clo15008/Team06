@@ -1,9 +1,12 @@
 package com.example.blank;
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -28,118 +31,49 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
+
+//should it be abstract??????
+//Multi Auto Complete TextView ---> dataBase
 
 
-    //Test version 1 
+ abstract class MainActivity extends AppCompatActivity implements OnTaskCompleted {
+
+    //Variables for the activity_main.xml
+    Button button;
+    EditText editText;
+    TextView textView;
     ProgressBar pb;
-    TextView tv1;
-    TextView tv2;
-    TextView tv3;
+
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        pb = (ProgressBar) findViewById(R.id.progressBar);
-        pb.setProgress(0);
-        tv1 = (TextView) findViewById(R.id.textView);
-        tv2 = (TextView) findViewById(R.id.textView2);
-        tv3 = (TextView) findViewById(R.id.textView3);
-     }
 
-    public void loadButton (View view){
+        button = (Button) findViewById(R.id.button);
+        editText = (EditText) findViewById(R.id.editText);
+        textView = (TextView) findViewById(R.id.textView);
+        pb = (ProgressBar) findViewById(R.id.progressBar);
+
+    }
+
+
+    public void getInput() {
+
+        Intent intent = new Intent(this, secondActivity.class);
+        intent.putExtra("getInput", editText.getText().toString());
+        startActivity(intent);
+
+    }
+
+
+    public void onClick(View view) {
 
         new RequestRecipe(this).execute();
     }
 
-    private static class RequestRecipe extends AsyncTask<URL,Integer,Void> {
 
-        private WeakReference<MainActivity> weakref;
-        String allLines = "";
-        List<Recipe> recipes = new ArrayList<Recipe>();
-
-        RequestRecipe(MainActivity activity){
-
-            weakref = new WeakReference<MainActivity>(activity);
-        }
-
-        @Override
-        protected Void doInBackground(URL... urls) {
-
-
-            try {
-
-                int i = 0;
-                URL url = new URL("https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/findByIngredients?ranking=1&ingredients=apples%2Cflour%2Csugar&number=5");
-                HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-                connection.setRequestProperty("X-Mashape-Key", "BBB93pKWHNmshVQ2JNR0STYwPj7Xp1hdsyMjsnJbdNPTkS63hu");
-                connection.setRequestProperty("X-Mashape-Host", "spoonacular-recipe-food-nutrition-v1.p.mashape.com");
-                connection.setRequestMethod("GET");
-
-                BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
-
-                String line = "";
-
-                do {
-
-                    line = reader.readLine();
-
-                    if (line != null) {
-
-                        allLines += line;
-                        publishProgress(i);
-                        i++;
-                    }
-
-                }
-
-                while (line != null);
-
-                Gson gson = new Gson();
-
-                JSONArray jsonarray = new JSONArray(allLines);
-
-                for(int j=0; i<jsonarray.length(); j++){
-                    JSONObject obj = jsonarray.getJSONObject(j);
-                    Recipe recipe = gson.fromJson(obj.toString(),Recipe.class);
-                    recipes.add(recipe);
-                }
-
-
-            } catch (MalformedURLException e) {
-                e.printStackTrace();
-            } catch (ProtocolException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-
-            return null;
-        }
-
-        protected void onProgressUpdate(Integer... values){
-
-            if(weakref.get() != null){
-
-                weakref.get().pb.setProgress(values[0]);
-            }
-        }
-
-        protected void onPostExecute(Void aVoid){
-
-            if(weakref.get() != null){
-
-                weakref.get().pb.setProgress(0);
-                weakref.get().tv1.setText(recipes.get(2).getId());
-                weakref.get().tv2.setText(recipes.get(2).getTitle());
-                weakref.get().tv3.setText(recipes.get(2).getLikes());
-                Toast.makeText(weakref.get(), "Recipe request process is done", Toast.LENGTH_SHORT).show();
-
-            }
-        }
-    }
 }
+
+
