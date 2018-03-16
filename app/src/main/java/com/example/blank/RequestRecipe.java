@@ -33,7 +33,6 @@ public class RequestRecipe extends AsyncTask<URL, Integer, Void> {
         this.listener = listener;
     }
 
-
         private WeakReference<MainActivity> weakref;
         String allLines = "";
         List<Recipe> recipes = new ArrayList<Recipe>();
@@ -41,12 +40,10 @@ public class RequestRecipe extends AsyncTask<URL, Integer, Void> {
         RequestRecipe(MainActivity activity) {
 
             weakref = new WeakReference<MainActivity>(activity);
-
         }
 
         @Override
         protected Void doInBackground(URL... urls) {
-
 
             try {
 
@@ -99,7 +96,6 @@ public class RequestRecipe extends AsyncTask<URL, Integer, Void> {
 
             return null;
         }
-
 
         protected void onProgressUpdate(Integer... values) {
 
