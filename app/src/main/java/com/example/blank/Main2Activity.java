@@ -1,8 +1,11 @@
 package com.example.blank;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -27,18 +30,10 @@ import java.util.List;
 
 public class Main2Activity extends AppCompatActivity {
 
-    TextView tv1;
-    TextView tv2;
-    TextView tv3;
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
-        tv1 = (TextView) findViewById(R.id.textView);
-        tv2 = (TextView) findViewById(R.id.textView2);
-        tv3 = (TextView) findViewById(R.id.textView3);
     }
 
     public void callInfo (View view){
@@ -48,26 +43,26 @@ public class Main2Activity extends AppCompatActivity {
 
     private static class RequestInfo extends AsyncTask<URL,Integer,Void> {
 
+        private Context context;
         private WeakReference<Main2Activity> weakref;
         String allLines = "";
-        //RecipeInfo info = new RecipeInfo();
-        RecipeInfo info = new RecipeInfo();
 
         RequestInfo(Main2Activity activity){
 
+            context = activity;
             weakref = new WeakReference<Main2Activity>(activity);
         }
 
         @Override
         protected Void doInBackground(URL... urls) {
 
-
+            //REQUEST INFO FROM API
             try {
-
                 int i = 0;
+                //479101
                 URL url = new URL("https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/479101/information");
                 HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-                connection.setRequestProperty("X-Mashape-Key", "BBB93pKWHNmshVQ2JNR0STYwPj7Xp1hdsyMjsnJbdNPTkS63hu");
+                connection.setRequestProperty("X-Mashape-Key", "ittcmgzIz1mshRfHT4GfOzDIgM4rp1bdJ59jsnI7kl8mVjgxCw");
                 connection.setRequestProperty("X-Mashape-Host", "spoonacular-recipe-food-nutrition-v1.p.mashape.com");
                 connection.setRequestMethod("GET");
 
@@ -86,16 +81,7 @@ public class Main2Activity extends AppCompatActivity {
                         i++;
                     }
 
-                }
-
-                while (line != null);
-
-                Gson gson = new Gson();
-
-                info = gson.fromJson(allLines,RecipeInfo.class);
-                //info = gson.fromJson(obj.toString(),RecipeInfo.class);
-                //info.add(rInfo);
-
+                } while (line != null);
 
             } catch (MalformedURLException e) {
                 e.printStackTrace();
@@ -117,16 +103,10 @@ public class Main2Activity extends AppCompatActivity {
         }
 
         protected void onPostExecute(Void aVoid){
-
-            if(weakref.get() != null){
-
-                //weakref.get().pb.setProgress(0);
-                //weakref.get().tv1.setText(info.getExtendedIngredients());
-                weakref.get().tv2.setText(info.getTitle());
-                weakref.get().tv3.setText(info.getInstructions());
-                Toast.makeText(weakref.get(), "Recipe request process is done", Toast.LENGTH_SHORT).show();
-
-            }
+            //GET INTENT
+            Intent intent = new Intent(context, Main3Activity.class);
+            intent.putExtra("obj", allLines);
+            weakref.get().startActivity(intent);
         }
     }
 }

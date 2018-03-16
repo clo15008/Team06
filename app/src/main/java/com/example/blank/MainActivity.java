@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -36,13 +37,14 @@ import java.util.List;
 //Multi Auto Complete TextView ---> dataBase
 
 
- abstract class MainActivity extends AppCompatActivity implements OnTaskCompleted {
+ public class MainActivity extends AppCompatActivity implements OnTaskCompleted {
 
     //Variables for the activity_main.xml
     Button button;
     EditText editText;
     TextView textView;
     ProgressBar pb;
+    private static final String log = "MainActivity";
 
 
 
@@ -64,6 +66,7 @@ import java.util.List;
         Intent intent = new Intent(this, secondActivity.class);
         intent.putExtra("getInput", editText.getText().toString());
         startActivity(intent);
+        Log.i(MainActivity.log,"message");
 
     }
 
@@ -73,7 +76,7 @@ import java.util.List;
         new RequestRecipe(this).execute();
     }
 
-
+    public void onTaskCompleted(){}
 }
 
 
