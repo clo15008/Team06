@@ -118,15 +118,15 @@ public class Main2Activity extends AppCompatActivity {
 
         protected void onPostExecute(Void aVoid){
 
-//            if(weakref.get() != null){
-//
-//                //weakref.get().pb.setProgress(0);
-//                //weakref.get().tv1.setText(info.getExtendedIngredients());
-//                weakref.get().tv2.setText(info.getTitle());
-//                weakref.get().tv3.setText(info.getInstructions());
-//                Toast.makeText(weakref.get(), "Recipe request process is done", Toast.LENGTH_SHORT).show();
-//
-//            }
+            if(weakref.get() != null){
+
+                //weakref.get().pb.setProgress(0);
+                //weakref.get().tv1.setText(info.getExtendedIngredients());
+                weakref.get().tv2.setText(info.getTitle());
+                weakref.get().tv3.setText(info.getInstructions());
+                Toast.makeText(weakref.get(), "Recipe request process is done", Toast.LENGTH_SHORT).show();
+
+            }
         }
     }
 }

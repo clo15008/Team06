@@ -3,7 +3,7 @@ package com.example.blank;
 import java.net.URL;
 
 /**
- * Created by Katya on 3/12/2018.
+ * Created by gclou on 3/6/2018.
  */
 
 public class RecipeInfo {
@@ -13,6 +13,7 @@ public class RecipeInfo {
     private String imageType;
     private String instructions;
     private String likes;
+    //private String extendedIngredients;
 
     public String getId() {
         return id;
@@ -31,5 +32,7 @@ public class RecipeInfo {
     public String getInstructions() { return instructions; }
 
     public String getLikes() { return likes; }
-}
 
+    //public String getExtendedIngredients(){ return extendedIngredients; }
+
+}

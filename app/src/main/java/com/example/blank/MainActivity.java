@@ -31,12 +31,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
-
-//should it be abstract??????
-//Multi Auto Complete TextView ---> dataBase
-
-
- abstract class MainActivity extends AppCompatActivity implements OnTaskCompleted {
+ public class MainActivity extends AppCompatActivity implements OnTaskCompleted {
 
     //Variables for the activity_main.xml
     Button button;
@@ -61,7 +56,7 @@ import java.util.List;
 
     public void getInput() {
 
-        Intent intent = new Intent(this, secondActivity.class);
+        Intent intent = new Intent(this, Main2Activity.class);
         intent.putExtra("getInput", editText.getText().toString());
         startActivity(intent);
 
@@ -73,7 +68,7 @@ import java.util.List;
         new RequestRecipe(this).execute();
     }
 
-
+  public void onTaskCompleted(){}
 }
 
 
