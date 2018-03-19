@@ -3,26 +3,15 @@
  */
 package com.example.blank;
 
-import android.content.SharedPreferences;
 import android.os.AsyncTask;
-import android.provider.ContactsContract;
-import android.support.v4.content.res.TypedArrayUtils;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.ListView;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 import com.squareup.picasso.Picasso;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -43,14 +32,11 @@ import java.util.List;
 public class RequestRecipeByIngredient {
 
 
-
         private static class RequestRecipe extends AsyncTask<URL,Integer,Void> {
 
             private WeakReference<MainActivity> weakref;
             private WeakReference<CustomAdator> weakrefCa;
             String allLines = "";
-
-
 
             RequestRecipe(MainActivity activity, CustomAdator actvity2){
 
@@ -97,9 +83,10 @@ public class RequestRecipeByIngredient {
                     for(int j=0; j<jsonarray.length(); j++){
                         JSONObject obj = jsonarray.getJSONObject(j);
                         Recipe recipe = gson.fromJson(obj.toString(),Recipe.class);
-                        url_list.add(recipe.getImageURL());
-                        recipe_title.add(recipe.getTitle());
-                        recipe_likes.add(recipe.getLikes());
+                        List<Recipe> recipes = new ArrayList<Recipe>();
+                        weakref.get().url_list.add(recipe.getImageURL());
+                        weakref.get().recipe_title.add(recipe.getTitle());
+                        weakref.get().recipe_likes.add(recipe.getLikes());
                         recipes.add(recipe);
 
                     }
@@ -131,9 +118,10 @@ public class RequestRecipeByIngredient {
 
         class CustomAdator extends BaseAdapter{
 
+            MainActivity a;
             @Override
             public int getCount() {
-                return url_list.size();
+                return a.url_list.size();
             }
 
             @Override
@@ -148,15 +136,15 @@ public class RequestRecipeByIngredient {
 
             @Override
             public View getView(int i, View view, ViewGroup viewGroup) {
-                view = getLayoutInflater().inflate(R.layout.costomized_listview,null);
+                view = a.getLayoutInflater().inflate(R.layout.costomized_listview,null);
 
                 ImageView imageView = (ImageView)view.findViewById(R.id.imageView);
                 TextView titleText = (TextView)view.findViewById(R.id.textView_title);
                 TextView likesText = (TextView)view.findViewById(R.id.textView_likes);
 
-                Picasso.with(getApplicationContext()).load(url_list.get(i)).into(imageView);
-                titleText.setText(recipe_title.get(i));
-                likesText.setText("likes: " + recipe_likes.get(i));
+                Picasso.with(a.getApplicationContext()).load(a.url_list.get(i)).into(imageView);
+                titleText.setText(a.recipe_title.get(i));
+                likesText.setText("likes: " + a.recipe_likes.get(i));
 
 
                 return view;
@@ -168,4 +156,4 @@ public class RequestRecipeByIngredient {
 
 
 
-}
+

@@ -4,10 +4,12 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -36,18 +38,26 @@ import java.util.List;
 //Multi Auto Complete TextView ---> dataBase
 
 
- abstract class MainActivity extends AppCompatActivity implements OnTaskCompleted {
+ public class MainActivity extends AppCompatActivity implements OnTaskCompleted {
 
     //Variables for the activity_main.xml
     Button button;
     EditText editText;
     TextView textView;
     ProgressBar pb;
+    ListView lv;
+    private static final String TAG = "MainActivity";
+
+     List<String> url_list = new ArrayList<String>();
+     List<String> recipe_title = new ArrayList<String>();
+     List<String> recipe_likes = new ArrayList<String>();
 
 
 
-    @Override
+     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        Log.i(MainActivity.TAG, "Successfully created the first activity");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
@@ -72,6 +82,8 @@ import java.util.List;
 
         new RequestRecipe(this).execute();
     }
+
+    public void onTaskCompleted(){}
 
 
 }

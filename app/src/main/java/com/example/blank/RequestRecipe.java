@@ -27,6 +27,7 @@ public class RequestRecipe extends AsyncTask<URL, Integer, Void> {
 
     private OnTaskCompleted listener;
 
+
     public RequestRecipe(OnTaskCompleted listener){
         this.listener = listener;
     }
@@ -110,6 +111,7 @@ public class RequestRecipe extends AsyncTask<URL, Integer, Void> {
 
 
         protected void onPostExecute(Void aVoid) {
+
 
             listener.onTaskCompleted();
 
