@@ -1,5 +1,6 @@
 package com.example.blank;
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.util.Log;
 
@@ -112,11 +113,16 @@ public class RequestRecipe extends AsyncTask<URL, Integer, Void> {
 
 
         protected void onPostExecute(Void aVoid) {
-            Log.w(RequestRecipe.TAG, "AsyncTask1 --> onPostExecute");
-            listener.onTaskCompleted();
+//            Log.w(RequestRecipe.TAG, "AsyncTask1 --> onPostExecute");
+//            listener.onTaskCompleted();
+//
+//            Intent intent = new Intent(, Main2Activity.class);
+//            intent.putExtra("getInput", editText.getText().toString());
+//            startActivity(intent);
 
         }
 
-    }
+
+}
 
 

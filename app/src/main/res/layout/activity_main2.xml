@@ -6,6 +6,7 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="#56b3bf"
         tools:context="com.example.blank.Main2Activity">
 
         <Button

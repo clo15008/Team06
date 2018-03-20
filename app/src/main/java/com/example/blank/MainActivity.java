@@ -54,13 +54,6 @@ import java.util.List;
     }
 
 
-    public void getInput() {
-
-        Intent intent = new Intent(this, Main2Activity.class);
-        intent.putExtra("getInput", editText.getText().toString());
-        startActivity(intent);
-
-    }
 
 
     public void onClick(View view) {
