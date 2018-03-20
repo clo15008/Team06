@@ -1,8 +1,6 @@
 package com.example.blank;
 
-import android.content.Intent;
 import android.os.AsyncTask;
-import android.util.Log;
 
 import com.google.gson.Gson;
 
@@ -28,7 +26,6 @@ import java.util.List;
 public class RequestRecipe extends AsyncTask<URL, Integer, Void> {
 
     private OnTaskCompleted listener;
-    private static final String TAG = "RequestRecipe";
 
     public RequestRecipe(OnTaskCompleted listener){
         this.listener = listener;
@@ -105,24 +102,15 @@ public class RequestRecipe extends AsyncTask<URL, Integer, Void> {
                 weakref.get().pb.setProgress(values[0]);
         }
 
-        else if (weakref.get() == null) {
-                Log.w(RequestRecipe.TAG, "The activity reference does not exist.");
-            }
-
         }
 
 
         protected void onPostExecute(Void aVoid) {
-//            Log.w(RequestRecipe.TAG, "AsyncTask1 --> onPostExecute");
-//            listener.onTaskCompleted();
-//
-//            Intent intent = new Intent(, Main2Activity.class);
-//            intent.putExtra("getInput", editText.getText().toString());
-//            startActivity(intent);
+
+            listener.onTaskCompleted();
 
         }
 
-
-}
+    }
 
 

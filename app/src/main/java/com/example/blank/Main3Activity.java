@@ -28,7 +28,16 @@ public class Main3Activity extends AppCompatActivity {
         tv6 = (TextView) findViewById(R.id.textView6);
 
         tv4.setText(obj.getTitle());
-        //tv5.setText(obj.getExtendedIngredients());
+
+        //GET INGREDIENTS
+        String ingred = "";
+        if(obj.getExtendedIngredients().length > 0) {
+            for (int i = 0; i < obj.getExtendedIngredients().length; i++)
+                ingred = ingred + obj.getExtendedIngredients()[i].getName() + "- " + obj.getExtendedIngredients()[i].getAmount() +
+                        " " + obj.getExtendedIngredients()[i].getUnit() + "\n";
+            tv5.setText(ingred);
+        }
+
         tv6.setText(obj.getInstructions());
     }
 }
