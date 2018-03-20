@@ -2,7 +2,9 @@ package com.example.blank;
 
 import android.util.Log;
 
+import java.lang.reflect.Array;
 import java.net.URL;
+import java.util.ArrayList;
 
 /**
  * Created by Katya on 3/12/2018.
@@ -15,7 +17,7 @@ public class RecipeInfo {
     private String imageType;
     private String instructions;
     private String likes;
-    //private String extendedIngredients[];
+    private Ingredients[] extendedIngredients;
 
     public String getId() {
         return id;
@@ -33,18 +35,6 @@ public class RecipeInfo {
 
     public String getInstructions() { return instructions; }
 
-    public String getLikes() { return likes; }
-
-    /*public String getExtendedIngredients() {
-        String ingred = "";
-        if(extendedIngredients.length > 0) {
-            for (int i = 0; i < extendedIngredients.length; i++)
-                ingred = ingred + extendedIngredients[i];
-            Log.i("extendedIngredients","ingred: " + ingred);
-            return ingred;
-        }
-        else
-            return "extendedIngredients is empty";
-    }*/
+    public Ingredients[] getExtendedIngredients() { return extendedIngredients; }
 }
 

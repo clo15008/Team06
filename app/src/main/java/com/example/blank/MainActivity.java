@@ -1,5 +1,6 @@
 package com.example.blank;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
@@ -21,6 +22,7 @@ import android.widget.TextView;
     TextView textView;
     ProgressBar pb;
     private static final String log = "MainActivity";
+    private Context context;
 
 
 
