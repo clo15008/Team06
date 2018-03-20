@@ -9,7 +9,6 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -45,19 +44,12 @@ import java.util.List;
     EditText editText;
     TextView textView;
     ProgressBar pb;
-    ListView lv;
-    private static final String TAG = "MainActivity";
-
-     List<String> url_list = new ArrayList<String>();
-     List<String> recipe_title = new ArrayList<String>();
-     List<String> recipe_likes = new ArrayList<String>();
+    private static final String log = "MainActivity";
 
 
 
-     @Override
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
-
-        Log.i(MainActivity.TAG, "Successfully created the first activity");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
@@ -71,9 +63,10 @@ import java.util.List;
 
     public void getInput() {
 
-        Intent intent = new Intent(this, secondActivity.class);
+        Intent intent = new Intent(this, Main2Activity.class);
         intent.putExtra("getInput", editText.getText().toString());
         startActivity(intent);
+        Log.i(MainActivity.log,"message");
 
     }
 
@@ -84,8 +77,6 @@ import java.util.List;
     }
 
     public void onTaskCompleted(){}
-
-
 }
 
 
