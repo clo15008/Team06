@@ -1,5 +1,7 @@
 package com.example.blank;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
 
 import com.google.gson.Gson;
@@ -26,6 +28,9 @@ import java.util.List;
 public class RequestRecipe extends AsyncTask<URL, Integer, Void> {
 
     private OnTaskCompleted listener;
+    private Context context;
+    List<Recipe> recipes = new ArrayList<Recipe>();
+
 
     public RequestRecipe(OnTaskCompleted listener){
         this.listener = listener;
@@ -33,20 +38,23 @@ public class RequestRecipe extends AsyncTask<URL, Integer, Void> {
 
         private WeakReference<MainActivity> weakref;
         String allLines = "";
-        List<Recipe> recipes = new ArrayList<Recipe>();
 
-        RequestRecipe(MainActivity activity) {
+
+    RequestRecipe(MainActivity activity) {
 
             weakref = new WeakReference<MainActivity>(activity);
-        }
+            context = activity;
+
+    }
 
         @Override
         protected Void doInBackground(URL... urls) {
 
             try {
 
+                String ingredient = "kimchi";
                 int i = 0;
-                URL url = new URL("https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/findByIngredients?ranking=1&ingredients=apples%2Cflour%2Csugar&number=5");
+                URL url = new URL("https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/findByIngredients?ranking=1&ingredients=apples%2Cflour%2Csugar&number=20");
                 HttpURLConnection connection = (HttpURLConnection) url.openConnection();
                 connection.setRequestProperty("X-Mashape-Key", "BBB93pKWHNmshVQ2JNR0STYwPj7Xp1hdsyMjsnJbdNPTkS63hu");
                 connection.setRequestProperty("X-Mashape-Host", "spoonacular-recipe-food-nutrition-v1.p.mashape.com");
@@ -71,15 +79,6 @@ public class RequestRecipe extends AsyncTask<URL, Integer, Void> {
 
                 while (line != null);
 
-                Gson gson = new Gson();
-
-                JSONArray jsonarray = new JSONArray(allLines);
-
-                for (int j = 0; i < jsonarray.length(); j++) {
-                    JSONObject obj = jsonarray.getJSONObject(j);
-                    Recipe recipe = gson.fromJson(obj.toString(), Recipe.class);
-                    recipes.add(recipe);
-                }
 
 
             } catch (MalformedURLException e) {
@@ -87,8 +86,6 @@ public class RequestRecipe extends AsyncTask<URL, Integer, Void> {
             } catch (ProtocolException e) {
                 e.printStackTrace();
             } catch (IOException e) {
-                e.printStackTrace();
-            } catch (JSONException e) {
                 e.printStackTrace();
             }
 
@@ -107,10 +104,11 @@ public class RequestRecipe extends AsyncTask<URL, Integer, Void> {
 
         protected void onPostExecute(Void aVoid) {
 
-            listener.onTaskCompleted();
+            Intent intent = new Intent(context, Main2Activity.class);
+            intent.putExtra("obj", allLines);
+            weakref.get().startActivity(intent);
 
         }
-
     }
 
 
