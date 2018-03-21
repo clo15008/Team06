@@ -46,6 +46,7 @@ import android.widget.TextView;
         intent.putExtra("getInput", editText.getText().toString());
         startActivity(intent);
         Log.i(MainActivity.log,"message");
+        //String[] test = url.split("\\,\\s?");
 
     }
 

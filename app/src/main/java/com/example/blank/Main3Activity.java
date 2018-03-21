@@ -1,16 +1,20 @@
 package com.example.blank;
 
+import android.media.Image;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
+import com.squareup.picasso.Picasso;
 
 public class Main3Activity extends AppCompatActivity {
     TextView tv4;
     TextView tv5;
     TextView tv6;
+    ImageView view;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
