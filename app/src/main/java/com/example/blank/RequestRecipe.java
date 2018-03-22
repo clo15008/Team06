@@ -111,5 +111,3 @@ public class RequestRecipe extends AsyncTask<URL, Integer, Void> {
 
         }
     }
-
-
