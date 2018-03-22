@@ -108,6 +108,5 @@ public class RequestRecipe extends AsyncTask<URL, Integer, Void> {
             Intent intent = new Intent(context, Main2Activity.class);
             intent.putExtra("obj", allLines);
             weakref.get().startActivity(intent);
-
         }
     }
