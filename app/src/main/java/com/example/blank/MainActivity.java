@@ -44,6 +44,7 @@ import java.util.List;
     EditText editText;
     TextView textView;
     ProgressBar pb;
+    String et;
     private static final String log = "MainActivity";
 
 
@@ -67,14 +68,12 @@ import java.util.List;
         intent.putExtra("getInput", editText.getText().toString());
         startActivity(intent);
         Log.i(MainActivity.log,"message");
-        //String[] test = url.split("\\,\\s?");
-
     }
 
 
     public void onClick(View view) {
 
-        new RequestRecipe(this).execute();
+        new RequestRecipe(this, editText).execute();
     }
 
     public void onTaskCompleted(){}
