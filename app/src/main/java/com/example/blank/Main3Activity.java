@@ -27,8 +27,6 @@ public class Main3Activity extends AppCompatActivity {
         String strObj = getIntent().getStringExtra("obj");
         RecipeInfo obj = gson.fromJson(strObj, RecipeInfo.class);
 
-        //Log.i("ExtendedIngredients","value: " + obj.getExtendedIngredients());
-
         tv4 = (TextView) findViewById(R.id.textView4);
         tv5 = (TextView) findViewById(R.id.textView5);
         tv6 = (TextView) findViewById(R.id.textView6);
