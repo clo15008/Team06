@@ -1,5 +1,7 @@
 package com.example.blank;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
 
 import com.google.gson.Gson;
@@ -26,91 +28,85 @@ import java.util.List;
 public class RequestRecipe extends AsyncTask<URL, Integer, Void> {
 
     private OnTaskCompleted listener;
+    private Context context;
+    List<Recipe> recipes = new ArrayList<Recipe>();
+
 
     public RequestRecipe(OnTaskCompleted listener){
         this.listener = listener;
     }
 
-        private WeakReference<MainActivity> weakref;
-        String allLines = "";
-        List<Recipe> recipes = new ArrayList<Recipe>();
+    private WeakReference<MainActivity> weakref;
+    String allLines = "";
 
-        RequestRecipe(MainActivity activity) {
 
-            weakref = new WeakReference<MainActivity>(activity);
-        }
+    RequestRecipe(MainActivity activity) {
 
-        @Override
-        protected Void doInBackground(URL... urls) {
+        weakref = new WeakReference<MainActivity>(activity);
+        context = activity;
 
-            try {
+    }
 
-                int i = 0;
-                URL url = new URL("https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/findByIngredients?ranking=1&ingredients=apples%2Cflour%2Csugar&number=5");
-                HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-                connection.setRequestProperty("X-Mashape-Key", "BBB93pKWHNmshVQ2JNR0STYwPj7Xp1hdsyMjsnJbdNPTkS63hu");
-                connection.setRequestProperty("X-Mashape-Host", "spoonacular-recipe-food-nutrition-v1.p.mashape.com");
-                connection.setRequestMethod("GET");
+    @Override
+    protected Void doInBackground(URL... urls) {
 
-                BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+        try {
 
-                String line = "";
+            String ingredient = "kimchi";
+            int i = 0;
+            URL url = new URL("https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/findByIngredients?ranking=1&ingredients=apples%2Cflour%2Csugar&number=20");
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            connection.setRequestProperty("X-Mashape-Key", "Z4VortkhmBmshnQP8ZDVuCWD6c6mp183oC1jsnT5HTCulZ3BDF");
+            connection.setRequestProperty("X-Mashape-Host", "spoonacular-recipe-food-nutrition-v1.p.mashape.com");
+            connection.setRequestMethod("GET");
 
-                do {
+            BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
 
-                    line = reader.readLine();
+            String line = "";
 
-                    if (line != null) {
+            do {
 
-                        allLines += line;
-                        publishProgress(i);
-                        i++;
-                    }
+                line = reader.readLine();
 
+                if (line != null) {
+
+                    allLines += line;
+                    publishProgress(i);
+                    i++;
                 }
 
-                while (line != null);
-
-                Gson gson = new Gson();
-
-                JSONArray jsonarray = new JSONArray(allLines);
-
-                for (int j = 0; i < jsonarray.length(); j++) {
-                    JSONObject obj = jsonarray.getJSONObject(j);
-                    Recipe recipe = gson.fromJson(obj.toString(), Recipe.class);
-                    recipes.add(recipe);
-                }
-
-
-            } catch (MalformedURLException e) {
-                e.printStackTrace();
-            } catch (ProtocolException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            } catch (JSONException e) {
-                e.printStackTrace();
             }
 
-            return null;
+            while (line != null);
+
+
+
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        } catch (ProtocolException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
 
-        protected void onProgressUpdate(Integer... values) {
+        return null;
+    }
 
-            if(weakref.get() != null){
+    protected void onProgressUpdate(Integer... values) {
 
-                weakref.get().pb.setProgress(values[0]);
-        }
+        if(weakref.get() != null){
 
-        }
-
-
-        protected void onPostExecute(Void aVoid) {
-//Trying to get right data
-            listener.onTaskCompleted();
-
+            weakref.get().pb.setProgress(values[0]);
         }
 
     }
 
 
+    protected void onPostExecute(Void aVoid) {
+
+        Intent intent = new Intent(context, Main2Activity.class);
+        intent.putExtra("obj", allLines);
+        weakref.get().startActivity(intent);
+
+    }
+}
