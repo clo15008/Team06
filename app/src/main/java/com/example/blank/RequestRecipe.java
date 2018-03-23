@@ -22,7 +22,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by Katya on 3/9/2018.
+ * This is a class that requests the recipes based on the ingredients that user has input
+ * using recipe API through AsyncTask
+ *
+ * @Author: Kyungwoo Jo
  */
 
 public class RequestRecipe extends AsyncTask<URL, Integer, Void> {
@@ -31,15 +34,15 @@ public class RequestRecipe extends AsyncTask<URL, Integer, Void> {
     private Context context;
     List<Recipe> recipes = new ArrayList<Recipe>();
 
+    // WeakReference to access into MainActivity
+    private WeakReference<MainActivity> weakref;
+    // allLines will read all Json strings from URL and save them into it.
+    String allLines = "";
 
-    public RequestRecipe(OnTaskCompleted listener){
-        this.listener = listener;
-    }
-
-        private WeakReference<MainActivity> weakref;
-        String allLines = "";
-
-
+    /**
+     * This function will allow you to request the recipes using AsyncTask
+     * @param activity
+     */
     RequestRecipe(MainActivity activity) {
 
             weakref = new WeakReference<MainActivity>(activity);
@@ -47,14 +50,19 @@ public class RequestRecipe extends AsyncTask<URL, Integer, Void> {
 
     }
 
-        @Override
-        protected Void doInBackground(URL... urls) {
+    /**
+     * This function will access into the URL given from "recipe nutrition API"
+     * to pull json that holds 20 different recipes' information.
+     * It will also read that Json information and save them into "allLines" using BufferReader.
+     * @param urls
+     * @return
+     */
+    protected Void doInBackground(URL... urls) {
 
             try {
 
-                String ingredient = "kimchi";
                 int i = 0;
-                URL url = new URL("https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/findByIngredients?ranking=1&ingredients=apples%2Cflour%2Csugar&number=20");
+                URL url = new URL("https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/findByIngredients?ranking=1&ingredients=kimchi%2Cpork%2Cflour%2Csugar&number=20");
                 HttpURLConnection connection = (HttpURLConnection) url.openConnection();
                 connection.setRequestProperty("X-Mashape-Key", "BBB93pKWHNmshVQ2JNR0STYwPj7Xp1hdsyMjsnJbdNPTkS63hu");
                 connection.setRequestProperty("X-Mashape-Host", "spoonacular-recipe-food-nutrition-v1.p.mashape.com");
@@ -79,8 +87,6 @@ public class RequestRecipe extends AsyncTask<URL, Integer, Void> {
 
                 while (line != null);
 
-
-
             } catch (MalformedURLException e) {
                 e.printStackTrace();
             } catch (ProtocolException e) {
@@ -92,7 +98,11 @@ public class RequestRecipe extends AsyncTask<URL, Integer, Void> {
             return null;
         }
 
-        protected void onProgressUpdate(Integer... values) {
+    /**
+     * This fuction will show
+     * @param values
+     */
+    protected void onProgressUpdate(Integer... values) {
 
             if(weakref.get() != null){
 
