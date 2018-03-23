@@ -1,15 +1,19 @@
 package com.example.blank;
 
+import android.media.Image;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+
 import android.view.View;
 import android.view.ViewGroup;
+
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
 import com.squareup.picasso.Picasso;
+
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -17,6 +21,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
+
 
 public class Main3Activity extends AppCompatActivity {
     TextView tv4;
