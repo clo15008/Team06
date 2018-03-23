@@ -20,6 +20,7 @@ import android.widget.TextView;
     EditText editText;
     TextView textView;
     ProgressBar pb;
+    String et;
     private static final String log = "MainActivity";
 
 
@@ -43,14 +44,12 @@ import android.widget.TextView;
         intent.putExtra("getInput", editText.getText().toString());
         startActivity(intent);
         Log.i(MainActivity.log,"message");
-        //String[] test = url.split("\\,\\s?");
-
     }
 
 
     public void onClick(View view) {
 
-        new RequestRecipe(this).execute();
+        new RequestRecipe(this, editText).execute();
     }
 
     public void onTaskCompleted(){}
