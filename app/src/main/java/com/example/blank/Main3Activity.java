@@ -10,6 +10,8 @@ import android.widget.TextView;
 import com.google.gson.Gson;
 import com.squareup.picasso.Picasso;
 
+import java.text.DecimalFormat;
+
 public class Main3Activity extends AppCompatActivity {
     TextView tv4;
     TextView tv5;
@@ -36,9 +38,14 @@ public class Main3Activity extends AppCompatActivity {
         //GET INGREDIENTS
         String ingred = "";
         if(obj.getExtendedIngredients().length > 0) {
-            for (int i = 0; i < obj.getExtendedIngredients().length; i++)
+            for (int i = 0; i < obj.getExtendedIngredients().length; i++) {
+                /*double d = 0;
+                DecimalFormat twoDForm = new DecimalFormat("#.####");
+                d = Double.valueOf(twoDForm.format(obj.getExtendedIngredients()[i].getUnit()));*/
+
                 ingred = ingred + obj.getExtendedIngredients()[i].getName() + "- " + obj.getExtendedIngredients()[i].getAmount() +
                         " " + obj.getExtendedIngredients()[i].getUnit() + "\n";
+            }
             tv5.setText(ingred);
         }
 
