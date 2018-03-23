@@ -36,77 +36,77 @@ public class RequestRecipe extends AsyncTask<URL, Integer, Void> {
         this.listener = listener;
     }
 
-    private WeakReference<MainActivity> weakref;
-    String allLines = "";
+        private WeakReference<MainActivity> weakref;
+        String allLines = "";
 
 
     RequestRecipe(MainActivity activity) {
 
-        weakref = new WeakReference<MainActivity>(activity);
-        context = activity;
+            weakref = new WeakReference<MainActivity>(activity);
+            context = activity;
 
     }
 
-    @Override
-    protected Void doInBackground(URL... urls) {
+        @Override
+        protected Void doInBackground(URL... urls) {
 
-        try {
+            try {
 
-            String ingredient = "kimchi";
-            int i = 0;
-            URL url = new URL("https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/findByIngredients?ranking=1&ingredients=apples%2Cflour%2Csugar&number=20");
-            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-            connection.setRequestProperty("X-Mashape-Key", "Z4VortkhmBmshnQP8ZDVuCWD6c6mp183oC1jsnT5HTCulZ3BDF");
-            connection.setRequestProperty("X-Mashape-Host", "spoonacular-recipe-food-nutrition-v1.p.mashape.com");
-            connection.setRequestMethod("GET");
+                String ingredient = "kimchi";
+                int i = 0;
+                                      //https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/findByIngredients?ranking=1&ingredients=apples%2Cflour%2Csugar&number=20
+                URL url = new URL("https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/findByIngredients?ranking=1&ingredients=apples%2Cflour%2Csugar&number=20");
+                HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+                connection.setRequestProperty("X-Mashape-Key", "BBB93pKWHNmshVQ2JNR0STYwPj7Xp1hdsyMjsnJbdNPTkS63hu");
+                connection.setRequestProperty("X-Mashape-Host", "spoonacular-recipe-food-nutrition-v1.p.mashape.com");
+                connection.setRequestMethod("GET");
 
-            BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+                BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
 
-            String line = "";
+                String line = "";
 
-            do {
+                do {
 
-                line = reader.readLine();
+                    line = reader.readLine();
 
-                if (line != null) {
+                    if (line != null) {
 
-                    allLines += line;
-                    publishProgress(i);
-                    i++;
+                        allLines += line;
+                        publishProgress(i);
+                        i++;
+                    }
+
                 }
 
+                while (line != null);
+
+
+
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            } catch (ProtocolException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
             }
 
-            while (line != null);
-
-
-
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        } catch (ProtocolException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
+            return null;
         }
 
-        return null;
-    }
+        protected void onProgressUpdate(Integer... values) {
 
-    protected void onProgressUpdate(Integer... values) {
+            if(weakref.get() != null){
 
-        if(weakref.get() != null){
-
-            weakref.get().pb.setProgress(values[0]);
+                weakref.get().pb.setProgress(values[0]);
         }
 
+        }
+
+
+        protected void onPostExecute(Void aVoid) {
+
+            Intent intent = new Intent(context, Main2Activity.class);
+            intent.putExtra("obj", allLines);
+            weakref.get().startActivity(intent);
+        }
     }
-
-
-    protected void onPostExecute(Void aVoid) {
-
-        Intent intent = new Intent(context, Main2Activity.class);
-        intent.putExtra("obj", allLines);
-        weakref.get().startActivity(intent);
-
-    }
-}
