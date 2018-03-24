@@ -7,13 +7,13 @@ import java.net.URL;
 import java.util.ArrayList;
 
 /**
- * Created by Katya on 3/12/2018.
+ * RecipeInfo recieves
  */
 
 public class RecipeInfo {
     private String id;
     private String title;
-    private URL imageURL;
+    private String image;
     private String imageType;
     private String instructions;
     private String likes;
@@ -27,8 +27,8 @@ public class RecipeInfo {
         return title;
     }
 
-    public URL getImageURL() {
-        return imageURL;
+    public String getImageURL() {
+        return image;
     }
 
     public String getImageType() { return imageType; }

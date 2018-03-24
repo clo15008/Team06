@@ -1,6 +1,5 @@
 package com.example.blank;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
@@ -21,9 +20,8 @@ import android.widget.TextView;
     EditText editText;
     TextView textView;
     ProgressBar pb;
+    String et;
     private static final String log = "MainActivity";
-    private Context context;
-
 
 
 
@@ -46,14 +44,12 @@ import android.widget.TextView;
         intent.putExtra("getInput", editText.getText().toString());
         startActivity(intent);
         Log.i(MainActivity.log,"message");
-
     }
 
 
     public void onClick(View view) {
 
-        new RequestRecipe(this).execute();
-
+        new RequestRecipe(this, editText).execute();
     }
 
     public void onTaskCompleted(){}
