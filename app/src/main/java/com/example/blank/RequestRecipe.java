@@ -32,6 +32,7 @@ public class RequestRecipe extends AsyncTask<URL, Integer, Void> {
     private Context context;
     List<Recipe> recipes = new ArrayList<Recipe>();
     private String[] input;
+    String typedText;
 
 
     public RequestRecipe(OnTaskCompleted listener){
@@ -47,7 +48,7 @@ public class RequestRecipe extends AsyncTask<URL, Integer, Void> {
         weakref = new WeakReference<MainActivity>(activity);
         context = activity;
         //String[] test = url.split("\\,\\s?");
-        String typedText = editText.getText().toString();
+        typedText = editText.getText().toString();
         input = typedText.split("\\,\\s?");
     }
 
@@ -116,6 +117,7 @@ public class RequestRecipe extends AsyncTask<URL, Integer, Void> {
 
             Intent intent = new Intent(context, Main2Activity.class);
             intent.putExtra("obj", allLines);
+            intent.putExtra("input", typedText);
             weakref.get().startActivity(intent);
         }
     }
