@@ -13,7 +13,7 @@ import java.util.ArrayList;
 public class RecipeInfo {
     private String id;
     private String title;
-    private String imageURL;
+    private String image;
     private String imageType;
     private String instructions;
     private String likes;
@@ -28,7 +28,7 @@ public class RecipeInfo {
     }
 
     public String getImageURL() {
-        return imageURL;
+        return image;
     }
 
     public String getImageType() { return imageType; }
