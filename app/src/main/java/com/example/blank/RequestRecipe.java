@@ -32,6 +32,7 @@ public class RequestRecipe extends AsyncTask<URL, Integer, Void> {
     private Context context;
     List<Recipe> recipes = new ArrayList<Recipe>();
     private String[] input;
+    String typedText;
 
 
     public RequestRecipe(OnTaskCompleted listener){
@@ -47,7 +48,7 @@ public class RequestRecipe extends AsyncTask<URL, Integer, Void> {
         weakref = new WeakReference<MainActivity>(activity);
         context = activity;
         //String[] test = url.split("\\,\\s?");
-        String typedText = editText.getText().toString();
+        typedText = editText.getText().toString();
         input = typedText.split("\\,\\s?");
     }
 
@@ -66,7 +67,7 @@ public class RequestRecipe extends AsyncTask<URL, Integer, Void> {
                 theUrl = theUrl + "&number=20";
                 URL url = new URL(theUrl);
                 HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-                connection.setRequestProperty("X-Mashape-Key", "BBB93pKWHNmshVQ2JNR0STYwPj7Xp1hdsyMjsnJbdNPTkS63hu");
+                connection.setRequestProperty("X-Mashape-Key", "ittcmgzIz1mshRfHT4GfOzDIgM4rp1bdJ59jsnI7kl8mVjgxCw");
                 connection.setRequestProperty("X-Mashape-Host", "spoonacular-recipe-food-nutrition-v1.p.mashape.com");
                 connection.setRequestMethod("GET");
 
@@ -116,6 +117,7 @@ public class RequestRecipe extends AsyncTask<URL, Integer, Void> {
 
             Intent intent = new Intent(context, Main2Activity.class);
             intent.putExtra("obj", allLines);
+            intent.putExtra("input", typedText);
             weakref.get().startActivity(intent);
         }
     }
