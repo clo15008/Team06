@@ -73,7 +73,7 @@ public class Main3Activity extends AppCompatActivity {
         String need = "";
         if(!ar.isEmpty()) {
             for (int i = 0; i < ar.size(); i++) {
-                need = need + ", " + ar.get(i);
+                need = need + ar.get(i) + ", ";
             }
             tv2.setText(need);
         }
@@ -81,8 +81,7 @@ public class Main3Activity extends AppCompatActivity {
 
         Picasso.with(getApplicationContext()).load(obj.getImageURL()).into(view);
         Log.i("Picture", "getImageURL()" + obj.getImageURL());
-
-
+        
     }
     }
 
