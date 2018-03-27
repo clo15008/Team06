@@ -64,10 +64,9 @@ import java.util.List;
 
     public void getInput() {
 
-        Intent intent = new Intent(this, Main2Activity.class);
+        /*Intent intent = new Intent(this, Main2Activity.class);
         intent.putExtra("getInput", editText.getText().toString());
-        startActivity(intent);
-        Log.i(MainActivity.log,"message");
+        startActivity(intent);*/
     }
 
 

@@ -37,6 +37,7 @@ public class Main2Activity extends AppCompatActivity {
     List<String> recipe_likes = new ArrayList<String>();
     ListView lv;
     String idNumber;
+    public String input;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +50,7 @@ public class Main2Activity extends AppCompatActivity {
 
         try {
             String strObj = getIntent().getStringExtra("obj");
+            input = getIntent().getStringExtra("input");
             JSONArray jsonarray = new JSONArray(strObj);
 
             for (int j = 0; j < jsonarray.length(); j++) {
@@ -62,7 +64,6 @@ public class Main2Activity extends AppCompatActivity {
                 lv.setAdapter( new CustomAdator());
 
             }
-
 
         }  catch (JSONException e) {
             e.printStackTrace();
@@ -79,6 +80,8 @@ public class Main2Activity extends AppCompatActivity {
             }
         });
     }
+
+    public String getInput() { return input; }
 
     public void callInfo (View view){
 
@@ -144,7 +147,7 @@ public class Main2Activity extends AppCompatActivity {
                 HttpURLConnection connection = (HttpURLConnection) url.openConnection();
                 //gcloud API - ittcmgzIz1mshRfHT4GfOzDIgM4rp1bdJ59jsnI7kl8mVjgxCw
                 // kj API - BBB93pKWHNmshVQ2JNR0STYwPj7Xp1hdsyMjsnJbdNPTkS63hu
-                connection.setRequestProperty("X-Mashape-Key", "BBB93pKWHNmshVQ2JNR0STYwPj7Xp1hdsyMjsnJbdNPTkS63hu");
+                connection.setRequestProperty("X-Mashape-Key", "ittcmgzIz1mshRfHT4GfOzDIgM4rp1bdJ59jsnI7kl8mVjgxCw");
                 connection.setRequestProperty("X-Mashape-Host", "spoonacular-recipe-food-nutrition-v1.p.mashape.com");
                 connection.setRequestMethod("GET");
 
@@ -179,7 +182,6 @@ public class Main2Activity extends AppCompatActivity {
         protected void onProgressUpdate(Integer... values){
 
             if(weakref.get() != null){
-
                 //weakref.get().pb.setProgress(values[0]);
             }
         }
@@ -188,6 +190,7 @@ public class Main2Activity extends AppCompatActivity {
             //GET INTENT
             Intent intent = new Intent(context, Main3Activity.class);
             intent.putExtra("obj", allLines);
+            intent.putExtra("input", weakref.get().getInput());
             weakref.get().startActivity(intent);
         }
     }
