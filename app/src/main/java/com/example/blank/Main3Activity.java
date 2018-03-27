@@ -50,7 +50,6 @@ public class Main3Activity extends AppCompatActivity {
         tv4.setText(obj.getTitle());
 
         //GET INGREDIENTS
-
         String ingred = "";
         if(obj.getExtendedIngredients().length > 0) {
             for (int i = 0; i < obj.getExtendedIngredients().length; i++)
@@ -65,10 +64,7 @@ public class Main3Activity extends AppCompatActivity {
         Log.i("Picture", "getImageURL()" + obj.getImageURL());
 
 
-
-
-
-
     }
+
     }
 
