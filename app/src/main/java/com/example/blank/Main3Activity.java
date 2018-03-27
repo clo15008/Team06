@@ -1,5 +1,7 @@
 package com.example.blank;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.media.Image;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -8,6 +10,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -28,7 +31,9 @@ public class Main3Activity extends AppCompatActivity {
     TextView tv5;
     TextView tv6;
     ImageView view;
-
+    Button buttonSave;
+    public static final String APP_PREFS = "APPLICATION_PREFERENCES";
+    public static  final String SAVE_RECIPE = "SAVING RECIPE";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,6 +51,7 @@ public class Main3Activity extends AppCompatActivity {
         tv5 = (TextView) findViewById(R.id.textView5);
         tv6 = (TextView) findViewById(R.id.textView6);
         view = (ImageView) findViewById(R.id.imageView2);
+        buttonSave = (Button) findViewById(R.id.buttonSave);
 
         tv4.setText(obj.getTitle());
 
@@ -66,9 +72,17 @@ public class Main3Activity extends AppCompatActivity {
 
 
 
-
-
-
     }
+
+//    public void onSaveRecipe(View buttonSave)
+//    {
+//        SharedPreferences sharedPrefs = getSharedPreferences(Main3Activity.APP_PREFS, Context.MODE_PRIVATE);
+//        SharedPreferences.Editor editor = sharedPrefs.edit();
+//
+//        editor.putString(Main3Activity.SAVE_RECIPE, obj);
+//
+//
+//    }
+
     }
 
