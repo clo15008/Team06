@@ -76,21 +76,16 @@ public class RequestRecipe extends AsyncTask<URL, Integer, Void> {
                 String line = "";
 
                 do {
-
                     line = reader.readLine();
 
                     if (line != null) {
-
                         allLines += line;
                         publishProgress(i);
                         i++;
                     }
-
                 }
 
                 while (line != null);
-
-
 
             } catch (MalformedURLException e) {
                 e.printStackTrace();
@@ -106,7 +101,6 @@ public class RequestRecipe extends AsyncTask<URL, Integer, Void> {
         protected void onProgressUpdate(Integer... values) {
 
             if(weakref.get() != null){
-
                 weakref.get().pb.setProgress(values[0]);
             }
 

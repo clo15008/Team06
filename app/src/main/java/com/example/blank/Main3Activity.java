@@ -47,15 +47,17 @@ public class Main3Activity extends AppCompatActivity {
         // Break up userInput by ','
         String[] userInput = input.split("\\,\\s?");
 
+        // Set variables to UI elements
         tv2 = (TextView) findViewById(R.id.textView2);
         tv4 = (TextView) findViewById(R.id.textView4);
         tv5 = (TextView) findViewById(R.id.textView5);
         tv6 = (TextView) findViewById(R.id.textView6);
         view = (ImageView) findViewById(R.id.imageView2);
 
+        // Set title
         tv4.setText(obj.getTitle());
 
-        //Get ingredients
+        // Set ingredients
         String ingred = "";
         if(obj.getExtendedIngredients().length > 0) {
             for (int i = 0; i < obj.getExtendedIngredients().length; i++) {
@@ -68,7 +70,7 @@ public class Main3Activity extends AppCompatActivity {
             tv5.setText(ingred);
         }
 
-        // Get instructions
+        // Set instructions
         String need = "";
         if(!ar.isEmpty()) {
             for (int i = 0; i < ar.size(); i++) {
@@ -86,7 +88,7 @@ public class Main3Activity extends AppCompatActivity {
             String[] addBreaks = modified.split("\\.");
 
             for (int i = 0; i < addBreaks.length; i++) {
-                finalMod = finalMod + addBreaks[i] + ".\n\n\n";
+                finalMod = finalMod + addBreaks[i] + ".\n\n";
             }
             tv6.setText(finalMod);
         }
