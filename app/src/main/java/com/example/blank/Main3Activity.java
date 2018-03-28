@@ -38,15 +38,14 @@ public class Main3Activity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main3);
 
+        //  Get Intent
         Gson gson = new Gson();
         String strObj = getIntent().getStringExtra("obj");
         String input = getIntent().getStringExtra("input");
         RecipeInfo obj = gson.fromJson(strObj, RecipeInfo.class);
 
-        Log.i("User Input", "input: " + input);
+        // Break up userInput by ','
         String[] userInput = input.split("\\,\\s?");
-
-        //Log.i("ExtendedIngredients","value: " + obj.getExtendedIngredients());
 
         tv2 = (TextView) findViewById(R.id.textView2);
         tv4 = (TextView) findViewById(R.id.textView4);
@@ -56,8 +55,7 @@ public class Main3Activity extends AppCompatActivity {
 
         tv4.setText(obj.getTitle());
 
-        //GET INGREDIENTS
-
+        //Get ingredients
         String ingred = "";
         if(obj.getExtendedIngredients().length > 0) {
             for (int i = 0; i < obj.getExtendedIngredients().length; i++) {
@@ -70,6 +68,7 @@ public class Main3Activity extends AppCompatActivity {
             tv5.setText(ingred);
         }
 
+        // Get instructions
         String need = "";
         if(!ar.isEmpty()) {
             for (int i = 0; i < ar.size(); i++) {
@@ -77,11 +76,23 @@ public class Main3Activity extends AppCompatActivity {
             }
             tv2.setText(need);
         }
-        tv6.setText(obj.getInstructions());
+        if(!obj.getInstructions().isEmpty()) {
+            String finalMod = "";
 
+            String modified = obj.getInstructions().replace("\n", "");
+            modified = modified.replaceAll("\\s{2,}?", "");
+            modified = modified.replace("\t","");
+            modified = modified.replace("Instructions","");
+            String[] addBreaks = modified.split("\\.");
+
+            for (int i = 0; i < addBreaks.length; i++) {
+                finalMod = finalMod + addBreaks[i] + ".\n\n\n";
+            }
+            tv6.setText(finalMod);
+        }
+
+        // Get picture of dish or recipe
         Picasso.with(getApplicationContext()).load(obj.getImageURL()).into(view);
-        Log.i("Picture", "getImageURL()" + obj.getImageURL());
-        
     }
-    }
+}
 
