@@ -8,8 +8,8 @@ import java.net.URL;
  * @author gcloud
  *
  */
-
 public class Ingredients {
+    // Private variables
     private String id;
     private String image;
     private String name;
