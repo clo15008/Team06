@@ -1,137 +1,151 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--<ScrollView-->
-    <!--xmlns:android="http://schemas.android.com/apk/res/android"-->
-    <!--xmlns:app="http://schemas.android.com/apk/res-auto"-->
-    <!--xmlns:tools="http://schemas.android.com/tools"-->
-    <!--android:layout_width="fill_parent"-->
-    <!--android:layout_height="fill_parent"-->
-    <!--android:background="@drawable/back3">-->
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/back3">
 
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/back3"
     tools:context="com.example.blank.Main3Activity">
 
     <TextView
         android:id="@+id/textView4"
-        android:layout_width="401dp"
-        android:layout_height="50dp"
-        android:layout_marginBottom="8dp"
+        android:layout_width="390dp"
+        android:layout_height="52dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginStart="12dp"
-        android:layout_marginTop="8dp"
-        android:alpha="0.80"
-        android:background="#01579B"
+        android:layout_marginStart="8dp"
         android:fontFamily="cursive"
         android:text="TextView"
         android:textAlignment="center"
         android:textColor="#edc626"
         android:textSize="36sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.54"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
+        android:background="#01579B"
+        android:alpha="0.80"/>
 
     <TextView
         android:id="@+id/textView5"
-        android:layout_width="wrap_content"
+        android:layout_width="288dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="192dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="232dp"
         android:alpha="0.75"
         android:background="@drawable/text_border"
-        android:text="TextView"
+        android:text="Ingredients"
         android:textAlignment="center"
         android:textColor="#060606"
         android:textSize="16sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.501"
+        app:layout_constraintHorizontal_bias="0.1"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView3" />
+        app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
     <TextView
         android:id="@+id/textView6"
-        android:layout_width="wrap_content"
+        android:layout_width="348dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
+        android:layout_marginBottom="10dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="30dp"
         android:alpha="0.75"
         android:background="@drawable/text_border"
-        android:text="TextView"
+        android:text="Instructions"
         android:textAlignment="center"
         android:textColor="#060606"
         android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView2"
-        app:layout_constraintVertical_bias="0.386" />
+        app:layout_constraintVertical_bias="1.0" />
 
     <ImageView
         android:id="@+id/imageView2"
-        android:layout_width="368dp"
+        android:layout_width="330dp"
         android:layout_height="163dp"
-        android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginTop="12dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView4"
-        app:layout_constraintVertical_bias="0.029"
         app:srcCompat="@mipmap/ic_launcher" />
 
     <TextView
         android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="26dp"
-        android:layout_marginBottom="8dp"
+        android:layout_width="348dp"
+        android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="28dp"
         android:alpha="0.75"
         android:background="@drawable/text_border"
-        android:text="You have all Ingredients"
+        android:text="Missing Ingredients"
         android:textAlignment="center"
         android:textColor="#060606"
         android:textSize="16sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.4"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView5"
-        app:layout_constraintVertical_bias="0.117" />
+        app:layout_constraintTop_toBottomOf="@+id/textView5" />
+
+    <TextView
+        android:id="@+id/textView7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="252dp"
+        android:alpha="0.75"
+        android:text="Ingredients"
+        android:textColor="#edc626"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="4dp"
+        android:alpha="0.75"
+        android:text="Missing Ingredients"
+        android:textColor="#edc626"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView5" />
 
     <TextView
         android:id="@+id/textView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:text="Ingredients"
+        android:layout_marginTop="4dp"
+        android:alpha="0.75"
+        android:text="Instructions"
         android:textColor="#edc626"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.029"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView2" />
+        app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
 </android.support.constraint.ConstraintLayout>
 
-<!--</ScrollView>-->
+</ScrollView>

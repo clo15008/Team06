@@ -21,6 +21,7 @@ import android.widget.TextView;
     TextView textView;
     ProgressBar pb;
     String et;
+    TextView tv;
     private static final String log = "MainActivity";
 
 
@@ -33,7 +34,8 @@ import android.widget.TextView;
         button = (Button) findViewById(R.id.button);
         editText = (EditText) findViewById(R.id.editText);
         textView = (TextView) findViewById(R.id.textView);
-        pb = (ProgressBar) findViewById(R.id.progressBar);
+        tv = (TextView) findViewById(R.id.textView9);
+        pb = (ProgressBar)findViewById(R.id.progressBar);
 
     }
 
