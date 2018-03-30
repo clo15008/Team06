@@ -25,6 +25,7 @@ import java.util.List;
 
 
 public class Main3Activity extends AppCompatActivity {
+    // Variables
     TextView tv2;
     TextView tv4;
     TextView tv5;
@@ -70,7 +71,7 @@ public class Main3Activity extends AppCompatActivity {
             tv5.setText(ingred);
         }
 
-        // Set instructions
+        // Set needed ingredients
         String need = "";
         if(!ar.isEmpty()) {
             for (int i = 0; i < ar.size(); i++) {
@@ -78,9 +79,12 @@ public class Main3Activity extends AppCompatActivity {
             }
             tv2.setText(need);
         }
+
+        // Set instructions
         if(!obj.getInstructions().isEmpty()) {
             String finalMod = "";
 
+            // Modify contents of instructions removing excess spacing, newlines and tab characters.
             String modified = obj.getInstructions().replace("\n", "");
             modified = modified.replaceAll("\\s{2,}?", "");
             modified = modified.replace("\t","");
