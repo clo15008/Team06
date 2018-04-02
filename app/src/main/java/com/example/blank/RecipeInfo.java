@@ -19,6 +19,8 @@ public class RecipeInfo {
     private String likes;
     private Ingredients[] extendedIngredients;
 
+    public String getLikes() { return likes; }
+
     public String getId() {
         return id;
     }

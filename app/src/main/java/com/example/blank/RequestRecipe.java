@@ -3,6 +3,7 @@ package com.example.blank;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.view.View;
 import android.widget.EditText;
 
 import com.google.gson.Gson;
@@ -62,8 +63,6 @@ public class RequestRecipe extends AsyncTask<URL, Integer, Void> {
     protected Void doInBackground(URL... urls) {
 
             try {
-
-                String ingredient = "kimchi";
                 int i = 0;
                 String theUrl = "https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/findByIngredients?ranking=1&ingredients=";
                 //https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/findByIngredients?ranking=1&ingredients=apples%2Cflour%2Csugar&number=20
@@ -127,5 +126,6 @@ public class RequestRecipe extends AsyncTask<URL, Integer, Void> {
             intent.putExtra("obj", allLines);
             intent.putExtra("input", typedText);
             weakref.get().startActivity(intent);
+
         }
     }

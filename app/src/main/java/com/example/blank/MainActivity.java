@@ -1,6 +1,8 @@
 package com.example.blank;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -44,8 +46,7 @@ import java.util.List;
     EditText editText;
     TextView textView;
     ProgressBar pb;
-    String et;
-    private static final String log = "MainActivity";
+    String recipeIdList;
 
 
 
@@ -62,17 +63,33 @@ import java.util.List;
     }
 
 
-    public void getInput() {
+    public void loadFavoriteRecipe(View view) {
 
-        /*Intent intent = new Intent(this, Main2Activity.class);
-        intent.putExtra("getInput", editText.getText().toString());
-        startActivity(intent);*/
+        SharedPreferences sharedPref = getSharedPreferences(Main3Activity.RECIPES_ID_LIST, Context.MODE_PRIVATE);
+        recipeIdList = sharedPref.getString(Main3Activity.Favorite_Racepi_id, null);
+
+        String[] id;
+        String idList = sharedPref.getString(Main3Activity.Favorite_Racepi_id,"nothing");
+        id = idList.split("/");
+
+        for(int i = 0; i<id.length; i++){
+
+            Log.i("idArray", id[i]);
+        }
+
+        Log.i("Share", sharedPref.getString(Main3Activity.Favorite_Racepi_id,"nothing"));
+
+        Intent intent = new Intent(this, Main2Activity.class);
+        intent.putExtra("idList", recipeIdList);
+        this.startActivity(intent);
+
     }
 
 
     public void onClick(View view) {
 
         new RequestRecipe(this, editText).execute();
+
     }
 
     public void onTaskCompleted(){}
