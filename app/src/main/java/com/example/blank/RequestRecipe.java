@@ -3,6 +3,7 @@ package com.example.blank;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.view.View;
 import android.widget.EditText;
 
 import com.google.gson.Gson;
@@ -74,6 +75,8 @@ public class RequestRecipe extends AsyncTask<URL, Integer, Void> {
 
                 String line = "";
 
+                // Json to String variable, view progress bar
+                weakref.get().pb.setVisibility(View.VISIBLE);
                 do {
                     line = reader.readLine();
 
@@ -82,9 +85,7 @@ public class RequestRecipe extends AsyncTask<URL, Integer, Void> {
                         publishProgress(i);
                         i++;
                     }
-                }
-
-                while (line != null);
+                } while (line != null);
 
             } catch (MalformedURLException e) {
                 e.printStackTrace();
@@ -102,7 +103,6 @@ public class RequestRecipe extends AsyncTask<URL, Integer, Void> {
             if(weakref.get() != null){
                 weakref.get().pb.setProgress(values[0]);
             }
-
         }
 
 
