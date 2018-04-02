@@ -3,6 +3,7 @@ package com.example.blank;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.view.View;
 import android.widget.EditText;
 
 import com.google.gson.Gson;
@@ -67,7 +68,7 @@ public class RequestRecipe extends AsyncTask<URL, Integer, Void> {
                 theUrl = theUrl + "&number=20";
                 URL url = new URL(theUrl);
                 HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-                connection.setRequestProperty("X-Mashape-Key", "");
+                connection.setRequestProperty("X-Mashape-Key", "ittcmgzIz1mshRfHT4GfOzDIgM4rp1bdJ59jsnI7kl8mVjgxCw");
                 connection.setRequestProperty("X-Mashape-Host", "spoonacular-recipe-food-nutrition-v1.p.mashape.com");
                 connection.setRequestMethod("GET");
 
@@ -75,6 +76,8 @@ public class RequestRecipe extends AsyncTask<URL, Integer, Void> {
 
                 String line = "";
 
+                // Json to String variable, view progress bar
+                weakref.get().pb.setVisibility(View.VISIBLE);
                 do {
                     line = reader.readLine();
 
@@ -83,9 +86,7 @@ public class RequestRecipe extends AsyncTask<URL, Integer, Void> {
                         publishProgress(i);
                         i++;
                     }
-                }
-
-                while (line != null);
+                } while (line != null);
 
             } catch (MalformedURLException e) {
                 e.printStackTrace();
@@ -103,7 +104,6 @@ public class RequestRecipe extends AsyncTask<URL, Integer, Void> {
             if(weakref.get() != null){
                 weakref.get().pb.setProgress(values[0]);
             }
-
         }
 
 

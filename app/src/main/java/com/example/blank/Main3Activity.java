@@ -81,7 +81,7 @@ public class Main3Activity extends AppCompatActivity {
         }
 
         // Set instructions
-        if(!obj.getInstructions().isEmpty()) {
+        if(obj.getInstructions()!= null) {
             String finalMod = "";
 
             // Modify contents of instructions removing excess spacing, newlines and tab characters.
@@ -95,6 +95,9 @@ public class Main3Activity extends AppCompatActivity {
                 finalMod = finalMod + addBreaks[i] + ".\n\n";
             }
             tv6.setText(finalMod);
+        }
+        else{
+            tv6.setText("Sorry, no ingredients available for this recipe.");
         }
 
         // Get picture of dish or recipe
