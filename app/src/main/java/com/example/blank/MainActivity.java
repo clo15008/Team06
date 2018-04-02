@@ -12,7 +12,6 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-
  public class MainActivity extends AppCompatActivity implements OnTaskCompleted {
 
     //Variables for the activity_main.xml
@@ -20,11 +19,7 @@ import android.widget.TextView;
     EditText editText;
     TextView textView;
     ProgressBar pb;
-    String et;
-    TextView tv;
     private static final String log = "MainActivity";
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,19 +29,9 @@ import android.widget.TextView;
         button = (Button) findViewById(R.id.button);
         editText = (EditText) findViewById(R.id.editText);
         textView = (TextView) findViewById(R.id.textView);
-        tv = (TextView) findViewById(R.id.textView9);
-        pb = (ProgressBar)findViewById(R.id.progressBar);
 
+        pb = (ProgressBar) findViewById(R.id.progressBar);
     }
-
-
-    public void getInput() {
-
-        /*Intent intent = new Intent(this, Main2Activity.class);
-        intent.putExtra("getInput", editText.getText().toString());
-        startActivity(intent);*/
-    }
-
 
     public void onClick(View view) {
 
