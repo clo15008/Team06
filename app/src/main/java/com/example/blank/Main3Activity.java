@@ -23,13 +23,12 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-
 public class Main3Activity extends AppCompatActivity {
     // Variables
-    TextView tv2;
-    TextView tv4;
-    TextView tv5;
-    TextView tv6;
+    TextView title;
+    TextView ingredients;
+    TextView missingIngredients;
+    TextView instructions;
     ImageView view;
     String needed = "";
     ArrayList<String> ar = new ArrayList<String>();
@@ -49,14 +48,14 @@ public class Main3Activity extends AppCompatActivity {
         String[] userInput = input.split("\\,\\s?");
 
         // Set variables to UI elements
-        tv2 = (TextView) findViewById(R.id.textView2);
-        tv4 = (TextView) findViewById(R.id.textView4);
-        tv5 = (TextView) findViewById(R.id.textView5);
-        tv6 = (TextView) findViewById(R.id.textView6);
+        missingIngredients = (TextView) findViewById(R.id.textView2);
+        title = (TextView) findViewById(R.id.textView4);
+        ingredients = (TextView) findViewById(R.id.textView5);
+        instructions = (TextView) findViewById(R.id.textView6);
         view = (ImageView) findViewById(R.id.imageView2);
 
         // Set title
-        tv4.setText(obj.getTitle());
+        title.setText(obj.getTitle());
 
         // Set ingredients
         String ingred = "";
@@ -68,16 +67,22 @@ public class Main3Activity extends AppCompatActivity {
                     ar.add(obj.getExtendedIngredients()[i].getName());
                 }
             }
-            tv5.setText(ingred);
+            ingredients.setText(ingred);
+        }
+        else {
+            ingredients.setText("Sorry, listed ingredients not available.");
         }
 
         // Set needed ingredients
         String need = "";
-        if(!ar.isEmpty()) {
+        if(ar != null) {
             for (int i = 0; i < ar.size(); i++) {
                 need = need + ar.get(i) + ", ";
             }
-            tv2.setText(need);
+            missingIngredients.setText(need);
+        }
+        else {
+            missingIngredients.setText("You have all the ingredients for this recipe.");
         }
 
         // Set instructions
@@ -94,10 +99,10 @@ public class Main3Activity extends AppCompatActivity {
             for (int i = 0; i < addBreaks.length; i++) {
                 finalMod = finalMod + addBreaks[i] + ".\n\n";
             }
-            tv6.setText(finalMod);
+            instructions.setText(finalMod);
         }
         else{
-            tv6.setText("Sorry, no ingredients available for this recipe.");
+            instructions.setText("Sorry, no instructions available for this recipe.");
         }
 
         // Get picture of dish or recipe

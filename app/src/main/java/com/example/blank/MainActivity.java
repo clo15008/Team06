@@ -19,7 +19,6 @@ import android.widget.TextView;
     EditText editText;
     TextView textView;
     ProgressBar pb;
-    String et;
     private static final String log = "MainActivity";
 
     @Override
