@@ -48,7 +48,6 @@ public class RequestRecipe extends AsyncTask<URL, Integer, Void> {
 
         weakref = new WeakReference<MainActivity>(activity);
         context = activity;
-        //String[] test = url.split("\\,\\s?");
         typedText = editText.getText().toString();
         input = typedText.split("\\,\\s?");
     }
@@ -63,6 +62,8 @@ public class RequestRecipe extends AsyncTask<URL, Integer, Void> {
     protected Void doInBackground(URL... urls) {
 
             try {
+
+                String ingredient = "kimchi";
                 int i = 0;
                 String theUrl = "https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/findByIngredients?ranking=1&ingredients=";
                 //https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/findByIngredients?ranking=1&ingredients=apples%2Cflour%2Csugar&number=20
@@ -72,7 +73,7 @@ public class RequestRecipe extends AsyncTask<URL, Integer, Void> {
                 theUrl = theUrl + "&number=20";
                 URL url = new URL(theUrl);
                 HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-                connection.setRequestProperty("X-Mashape-Key", "ittcmgzIz1mshRfHT4GfOzDIgM4rp1bdJ59jsnI7kl8mVjgxCw");
+                connection.setRequestProperty("X-Mashape-Key", "Z4VortkhmBmshnQP8ZDVuCWD6c6mp183oC1jsnT5HTCulZ3BDF");
                 connection.setRequestProperty("X-Mashape-Host", "spoonacular-recipe-food-nutrition-v1.p.mashape.com");
                 connection.setRequestMethod("GET");
 
@@ -80,20 +81,17 @@ public class RequestRecipe extends AsyncTask<URL, Integer, Void> {
 
                 String line = "";
 
+                // Json to String variable, view progress bar
+                weakref.get().pb.setVisibility(View.VISIBLE);
                 do {
-
                     line = reader.readLine();
 
                     if (line != null) {
-
                         allLines += line;
                         publishProgress(i);
                         i++;
                     }
-
-                }
-
-                while (line != null);
+                } while (line != null);
 
             } catch (MalformedURLException e) {
                 e.printStackTrace();
@@ -113,10 +111,8 @@ public class RequestRecipe extends AsyncTask<URL, Integer, Void> {
     protected void onProgressUpdate(Integer... values) {
 
             if(weakref.get() != null){
-
                 weakref.get().pb.setProgress(values[0]);
             }
-
         }
 
 

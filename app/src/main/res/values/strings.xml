@@ -2,5 +2,6 @@
     <string name="app_name">Blank</string>
     <string name="Load_button">LOAD</string>
     <string name="title_activity_main3">Main3Activity</string>
+    <string name="title_activity_intro">IntroActivity</string>
     <string name="F_R">F.R</string>
 </resources>

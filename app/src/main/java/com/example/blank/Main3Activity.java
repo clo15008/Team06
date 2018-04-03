@@ -26,12 +26,12 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-
 public class Main3Activity extends AppCompatActivity {
-    TextView tv2;
-    TextView tv4;
-    TextView tv5;
-    TextView tv6;
+    // Variables
+    TextView title;
+    TextView ingredients;
+    TextView missingIngredients;
+    TextView instructions;
     ImageView view;
     String needed = "";
     RecipeInfo obj;
@@ -45,30 +45,30 @@ public class Main3Activity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main3);
 
+        //  Get Intent
         Gson gson = new Gson();
         String strObj = getIntent().getStringExtra("obj");
         String input = getIntent().getStringExtra("input");
         obj = gson.fromJson(strObj, RecipeInfo.class);
 
-        Log.i("User Input", "input: " + input);
-        //String[] userInput = input.split("\\,\\s?");
+        // Break up userInput by ','
+          Log.i("User Input", "input: " + input);
+         String[] userInput = input.split("\\,\\s?");
 
-        //Log.i("ExtendedIngredients","value: " + obj.getExtendedIngredients());
-
-        tv2 = (TextView) findViewById(R.id.textView2);
-        tv4 = (TextView) findViewById(R.id.textView4);
-        tv5 = (TextView) findViewById(R.id.textView5);
-        tv6 = (TextView) findViewById(R.id.textView6);
+        // Set variables to UI elements
+        missingIngredients = (TextView) findViewById(R.id.textView2);
+        title = (TextView) findViewById(R.id.textView4);
+        ingredients = (TextView) findViewById(R.id.textView5);
+        instructions = (TextView) findViewById(R.id.textView6);
         view = (ImageView) findViewById(R.id.imageView2);
 
-        tv4.setText(obj.getTitle());
+        // Set title
+        title.setText(obj.getTitle());
 
         if(getIntent().getStringExtra("input") != "");
         {
-            //GET INGREDIENTS
-            String[] userInput = input.split("\\,\\s?");
             String ingred = "";
-            if (obj.getExtendedIngredients().length > 0) {
+            if(obj.getExtendedIngredients().length > 0) {
                 for (int i = 0; i < obj.getExtendedIngredients().length; i++) {
                     ingred = ingred + obj.getExtendedIngredients()[i].getName() + "- " + obj.getExtendedIngredients()[i].getAmount() +
                             " " + obj.getExtendedIngredients()[i].getUnit() + "\n";
@@ -76,18 +76,47 @@ public class Main3Activity extends AppCompatActivity {
                         ar.add(obj.getExtendedIngredients()[i].getName());
                     }
                 }
-                tv5.setText(ingred);
+                ingredients.setText(ingred);
             }
+            else {
+                ingredients.setText("Sorry, listed ingredients not available.");
+            }
+
         }
 
+        // Set needed ingredients
         String need = "";
-        if(!ar.isEmpty()) {
+        if(ar != null) {
             for (int i = 0; i < ar.size(); i++) {
-                need = need + ", " + ar.get(i);
+                need = need + ar.get(i) + ", ";
             }
-            tv2.setText(need);
+            missingIngredients.setText(need);
         }
-        tv6.setText(obj.getInstructions());
+        else {
+            missingIngredients.setText("You have all the ingredients for this recipe.");
+        }
+
+        // Set instructions
+        if(obj.getInstructions()!= null) {
+            String finalMod = "";
+
+            // Modify contents of instructions removing excess spacing, newlines and tab characters.
+            String modified = obj.getInstructions().replace("\n", "");
+            modified = modified.replaceAll("\\s{2,}?", "");
+            modified = modified.replace("\t","");
+            modified = modified.replace("Instructions","");
+            String[] addBreaks = modified.split("\\.");
+
+            for (int i = 0; i < addBreaks.length; i++) {
+                finalMod = finalMod + addBreaks[i] + ".\n\n";
+            }
+            instructions.setText(finalMod);
+        }
+        else{
+            instructions.setText("Sorry, no instructions available for this recipe.");
+        }
+
+        // Get picture of dish or recipe
         Picasso.with(getApplicationContext()).load(obj.getImageURL()).into(view);
         Log.i("Picture", "getImageURL()" + obj.getImageURL());
 

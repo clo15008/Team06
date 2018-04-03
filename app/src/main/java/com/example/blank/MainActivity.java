@@ -13,27 +13,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.lang.ref.WeakReference;
-import java.lang.reflect.Type;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.ProtocolException;
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
-
 
 //should it be abstract??????
 //Multi Auto Complete TextView ---> dataBase
@@ -47,6 +26,7 @@ import java.util.List;
     TextView textView;
     ProgressBar pb;
     String recipeIdList;
+    private static final String log = "MainActivity";
 
 
 
@@ -58,8 +38,8 @@ import java.util.List;
         button = (Button) findViewById(R.id.button);
         editText = (EditText) findViewById(R.id.editText);
         textView = (TextView) findViewById(R.id.textView);
-        pb = (ProgressBar) findViewById(R.id.progressBar);
 
+        pb = (ProgressBar) findViewById(R.id.progressBar);
     }
 
 
