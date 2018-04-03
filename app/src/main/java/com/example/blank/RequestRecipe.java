@@ -24,7 +24,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by Katya on 3/9/2018.
+ * This is a class that requests the recipes based on the ingredients that user has input
+ * using recipe API through AsyncTask
+ *
+ * @Author: Kyungwoo Jo
  */
 
 public class RequestRecipe extends AsyncTask<URL, Integer, Void> {
@@ -35,13 +38,10 @@ public class RequestRecipe extends AsyncTask<URL, Integer, Void> {
     private String[] input;
     String typedText;
 
-
-    public RequestRecipe(OnTaskCompleted listener){
-        this.listener = listener;
-    }
-
-        private WeakReference<MainActivity> weakref;
-        String allLines = "";
+    // WeakReference to access into MainActivity
+    private WeakReference<MainActivity> weakref;
+    // allLines will read all Json strings from URL and save them into it.
+    String allLines = "";
 
 
     RequestRecipe(MainActivity activity, EditText editText) {
@@ -52,8 +52,14 @@ public class RequestRecipe extends AsyncTask<URL, Integer, Void> {
         input = typedText.split("\\,\\s?");
     }
 
-        @Override
-        protected Void doInBackground(URL... urls) {
+    /**
+     * This function will access into the URL given from "recipe nutrition API"
+     * to pull json that holds 20 different recipes' information.
+     * It will also read that Json information and save them into "allLines" using BufferReader.
+     * @param urls
+     * @return
+     */
+    protected Void doInBackground(URL... urls) {
 
             try {
 
@@ -98,7 +104,11 @@ public class RequestRecipe extends AsyncTask<URL, Integer, Void> {
             return null;
         }
 
-        protected void onProgressUpdate(Integer... values) {
+    /**
+     * This fuction will show
+     * @param values
+     */
+    protected void onProgressUpdate(Integer... values) {
 
             if(weakref.get() != null){
                 weakref.get().pb.setProgress(values[0]);
@@ -112,5 +122,6 @@ public class RequestRecipe extends AsyncTask<URL, Integer, Void> {
             intent.putExtra("obj", allLines);
             intent.putExtra("input", typedText);
             weakref.get().startActivity(intent);
+
         }
     }

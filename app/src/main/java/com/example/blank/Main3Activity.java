@@ -1,5 +1,7 @@
 package com.example.blank;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.media.Image;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -10,6 +12,7 @@ import android.view.ViewGroup;
 
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.squareup.picasso.Picasso;
@@ -31,7 +34,11 @@ public class Main3Activity extends AppCompatActivity {
     TextView instructions;
     ImageView view;
     String needed = "";
+    RecipeInfo obj;
     ArrayList<String> ar = new ArrayList<String>();
+    public static final String RECIPES_ID_LIST = "USER_FAVORITE_RECIPE";
+    public static final String Favorite_Racepi_id = "Favorite_Racepi_id";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,10 +49,11 @@ public class Main3Activity extends AppCompatActivity {
         Gson gson = new Gson();
         String strObj = getIntent().getStringExtra("obj");
         String input = getIntent().getStringExtra("input");
-        RecipeInfo obj = gson.fromJson(strObj, RecipeInfo.class);
+        obj = gson.fromJson(strObj, RecipeInfo.class);
 
         // Break up userInput by ','
-        String[] userInput = input.split("\\,\\s?");
+          Log.i("User Input", "input: " + input);
+         String[] userInput = input.split("\\,\\s?");
 
         // Set variables to UI elements
         missingIngredients = (TextView) findViewById(R.id.textView2);
@@ -57,20 +65,23 @@ public class Main3Activity extends AppCompatActivity {
         // Set title
         title.setText(obj.getTitle());
 
-        // Set ingredients
-        String ingred = "";
-        if(obj.getExtendedIngredients().length > 0) {
-            for (int i = 0; i < obj.getExtendedIngredients().length; i++) {
-                ingred = ingred + obj.getExtendedIngredients()[i].getName() + "- " + obj.getExtendedIngredients()[i].getAmount() +
-                        " " + obj.getExtendedIngredients()[i].getUnit() + "\n";
-                if (!Arrays.asList(userInput).contains(obj.getExtendedIngredients()[i].getName())) {
-                    ar.add(obj.getExtendedIngredients()[i].getName());
+        if(getIntent().getStringExtra("input") != "");
+        {
+            String ingred = "";
+            if(obj.getExtendedIngredients().length > 0) {
+                for (int i = 0; i < obj.getExtendedIngredients().length; i++) {
+                    ingred = ingred + obj.getExtendedIngredients()[i].getName() + "- " + obj.getExtendedIngredients()[i].getAmount() +
+                            " " + obj.getExtendedIngredients()[i].getUnit() + "\n";
+                    if (!Arrays.asList(userInput).contains(obj.getExtendedIngredients()[i].getName())) {
+                        ar.add(obj.getExtendedIngredients()[i].getName());
+                    }
                 }
+                ingredients.setText(ingred);
             }
-            ingredients.setText(ingred);
-        }
-        else {
-            ingredients.setText("Sorry, listed ingredients not available.");
+            else {
+                ingredients.setText("Sorry, listed ingredients not available.");
+            }
+
         }
 
         // Set needed ingredients
@@ -107,6 +118,23 @@ public class Main3Activity extends AppCompatActivity {
 
         // Get picture of dish or recipe
         Picasso.with(getApplicationContext()).load(obj.getImageURL()).into(view);
+        Log.i("Picture", "getImageURL()" + obj.getImageURL());
+
+
     }
-}
+
+    public void save_Racipe(View view){
+
+        String id = obj.getId() + '/';
+        SharedPreferences sharedPref = getSharedPreferences(RECIPES_ID_LIST, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putString(Favorite_Racepi_id, sharedPref.getString(Favorite_Racepi_id,null) + id);
+        editor.apply();
+        Log.i("Share", sharedPref.getString(Favorite_Racepi_id,"nothing"));
+
+        Toast.makeText(this, "Successfully Saved the recipe", Toast.LENGTH_SHORT).show();
+
+    }
+
+    }
 
