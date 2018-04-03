@@ -246,7 +246,7 @@ public class Main2Activity extends AppCompatActivity {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-
+//
             RecipeInfo recipeInfo = gson.fromJson(allLines, RecipeInfo.class);
             recipesInfo.add(recipeInfo);
             url_list.add(recipeInfo.getImageURL());

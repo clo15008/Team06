@@ -28,8 +28,6 @@ import android.widget.TextView;
     String recipeIdList;
     private static final String log = "MainActivity";
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,8 +36,8 @@ import android.widget.TextView;
         button = (Button) findViewById(R.id.button);
         editText = (EditText) findViewById(R.id.editText);
         textView = (TextView) findViewById(R.id.textView);
-
         pb = (ProgressBar) findViewById(R.id.progressBar);
+
     }
 
 
