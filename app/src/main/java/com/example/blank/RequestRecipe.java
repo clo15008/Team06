@@ -62,8 +62,6 @@ public class RequestRecipe extends AsyncTask<URL, Integer, Void> {
     protected Void doInBackground(URL... urls) {
 
             try {
-
-                String ingredient = "kimchi";
                 int i = 0;
                 String theUrl = "https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/findByIngredients?ranking=1&ingredients=";
                 //https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/findByIngredients?ranking=1&ingredients=apples%2Cflour%2Csugar&number=20
