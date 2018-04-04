@@ -81,7 +81,6 @@ public class Main3Activity extends AppCompatActivity {
             else {
                 ingredients.setText("Sorry, listed ingredients not available.");
             }
-
         }
 
         // Set needed ingredients
@@ -97,7 +96,7 @@ public class Main3Activity extends AppCompatActivity {
         }
 
         // Set instructions
-        if(obj.getInstructions()!= null) {
+        if(!obj.getInstructions().equals(null)) {
             String finalMod = "";
 
             // Modify contents of instructions removing excess spacing, newlines and tab characters.
@@ -105,12 +104,17 @@ public class Main3Activity extends AppCompatActivity {
             modified = modified.replaceAll("\\s{2,}?", "");
             modified = modified.replace("\t","");
             modified = modified.replace("Instructions","");
-            String[] addBreaks = modified.split("\\.");
+            if(!(modified.equals(""))) {
+                String[] addBreaks = modified.split("\\.");
 
-            for (int i = 0; i < addBreaks.length; i++) {
-                finalMod = finalMod + addBreaks[i] + ".\n\n";
+                for (int i = 0; i < addBreaks.length; i++) {
+                    finalMod = finalMod + addBreaks[i] + ".\n\n";
+                }
+                instructions.setText(finalMod);
             }
-            instructions.setText(finalMod);
+            else {
+                instructions.setText("Sorry, no instructions available for this recipe.");
+            }
         }
         else{
             instructions.setText("Sorry, no instructions available for this recipe.");
@@ -119,8 +123,6 @@ public class Main3Activity extends AppCompatActivity {
         // Get picture of dish or recipe
         Picasso.with(getApplicationContext()).load(obj.getImageURL()).into(view);
         Log.i("Picture", "getImageURL()" + obj.getImageURL());
-
-
     }
 
     public void save_Racipe(View view){
@@ -133,8 +135,6 @@ public class Main3Activity extends AppCompatActivity {
         Log.i("Share", sharedPref.getString(Favorite_Racepi_id,"nothing"));
 
         Toast.makeText(this, "Successfully Saved the recipe", Toast.LENGTH_SHORT).show();
-
     }
-
-    }
+}
 

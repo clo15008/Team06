@@ -62,9 +62,7 @@ import android.widget.TextView;
         Intent intent = new Intent(this, Main2Activity.class);
         intent.putExtra("idList", recipeIdList);
         this.startActivity(intent);
-
     }
-
 
     public void onClick(View view) {
 

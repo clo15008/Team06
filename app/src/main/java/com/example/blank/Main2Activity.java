@@ -207,13 +207,12 @@ public class Main2Activity extends AppCompatActivity {
             //REQUEST INFO FROM API
             try {
                 int i = 0;
-                //479101
                 Log.i("check" ,strings[0]);
                 URL url = new URL("https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/" + strings[0] + "/information");
                 HttpURLConnection connection = (HttpURLConnection) url.openConnection();
                 //gcloud API - ittcmgzIz1mshRfHT4GfOzDIgM4rp1bdJ59jsnI7kl8mVjgxCw
                 // kj API - BBB93pKWHNmshVQ2JNR0STYwPj7Xp1hdsyMjsnJbdNPTkS63hu
-                connection.setRequestProperty("X-Mashape-Key", "BBB93pKWHNmshVQ2JNR0STYwPj7Xp1hdsyMjsnJbdNPTkS63hu");
+                connection.setRequestProperty("X-Mashape-Key", "ittcmgzIz1mshRfHT4GfOzDIgM4rp1bdJ59jsnI7kl8mVjgxCw");
                 connection.setRequestProperty("X-Mashape-Host", "spoonacular-recipe-food-nutrition-v1.p.mashape.com");
                 connection.setRequestMethod("GET");
 
@@ -234,7 +233,11 @@ public class Main2Activity extends AppCompatActivity {
 
                 } while (line != null);
 
-                Log.i("test", allLines);
+                RecipeInfo recipeInfo = gson.fromJson(allLines, RecipeInfo.class);
+                recipesInfo.add(recipeInfo);
+                url_list.add(recipeInfo.getImageURL());
+                recipe_title.add(recipeInfo.getTitle());
+                recipe_likes.add(recipeInfo.getLikes());
 
             } catch (MalformedURLException e) {
                 e.printStackTrace();
@@ -243,12 +246,6 @@ public class Main2Activity extends AppCompatActivity {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-
-            RecipeInfo recipeInfo = gson.fromJson(allLines, RecipeInfo.class);
-            recipesInfo.add(recipeInfo);
-            url_list.add(recipeInfo.getImageURL());
-            recipe_title.add(recipeInfo.getTitle());
-            recipe_likes.add(recipeInfo.getLikes());
 
             return null;
         }
@@ -292,13 +289,11 @@ public class Main2Activity extends AppCompatActivity {
             TextView titleText = (TextView)view.findViewById(R.id.textView_title);
             TextView likesText = (TextView)view.findViewById(R.id.textView_likes);
             Log.i("ithRecipe", Integer.toString(i) + " " + recipe_title.get(i));
+
             Picasso.with(getApplicationContext()).load(url_list.get(i)).into(imageView);
             titleText.setText(recipe_title.get(i));
             likesText.setText("likes: " + recipe_likes.get(i));
             return view;
-
         }
     }
-
-
 }
