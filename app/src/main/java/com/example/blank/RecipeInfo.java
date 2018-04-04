@@ -20,10 +20,14 @@ public class RecipeInfo {
     private String likes;
     private Ingredients[] extendedIngredients;
 
+
     /**
      *
      * @return The id variable of recipe
      */
+    public String getLikes() { return likes; }
+
+
     public String getId() {
         return id;
     }
