@@ -95,15 +95,16 @@ public class Main3Activity extends AppCompatActivity {
             modified = modified.replaceAll("\\s{2,}?", "");
             modified = modified.replace("\t","");
             modified = modified.replace("Instructions","");
+            System.out.print("instructions" + modified);
             Log.i("instructions", modified);
-            if(modified != "" || modified != null) {
+            if((modified != "") || (modified != null) || (modified != ".") || (!modified.isEmpty())) {
                 String[] addBreaks = modified.split("\\.");
 
                 for (int i = 0; i < addBreaks.length; i++) {
                     finalMod = finalMod + addBreaks[i] + ".\n\n";
                 }
                 instructions.setText(finalMod);
-                //Log.i("finalMod", finalMod);
+                Log.i("finalMod", finalMod);
             }
             else {
                 instructions.setText("Sorry, no instructions available for this recipe.");
