@@ -30,7 +30,7 @@ public class Main3Activity extends AppCompatActivity {
     TextView missingIngredients;
     TextView instructions;
     ImageView view;
-    String needed = "";
+    //String needed = "";
     ArrayList<String> ar = new ArrayList<String>();
 
     @Override
@@ -90,16 +90,24 @@ public class Main3Activity extends AppCompatActivity {
             String finalMod = "";
 
             // Modify contents of instructions removing excess spacing, newlines and tab characters.
+            //Log.i("instructions", obj.getInstructions());
             String modified = obj.getInstructions().replace("\n", "");
             modified = modified.replaceAll("\\s{2,}?", "");
             modified = modified.replace("\t","");
             modified = modified.replace("Instructions","");
-            String[] addBreaks = modified.split("\\.");
+            Log.i("instructions", modified);
+            if(modified != "" || modified != null) {
+                String[] addBreaks = modified.split("\\.");
 
-            for (int i = 0; i < addBreaks.length; i++) {
-                finalMod = finalMod + addBreaks[i] + ".\n\n";
+                for (int i = 0; i < addBreaks.length; i++) {
+                    finalMod = finalMod + addBreaks[i] + ".\n\n";
+                }
+                instructions.setText(finalMod);
+                //Log.i("finalMod", finalMod);
             }
-            instructions.setText(finalMod);
+            else {
+                instructions.setText("Sorry, no instructions available for this recipe.");
+            }
         }
         else{
             instructions.setText("Sorry, no instructions available for this recipe.");
