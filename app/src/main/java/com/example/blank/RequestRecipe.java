@@ -29,7 +29,6 @@ import java.util.List;
  *
  * @Author: Kyungwoo Jo
  */
-
 public class RequestRecipe extends AsyncTask<URL, Integer, Void> {
 
     private OnTaskCompleted listener;
@@ -43,7 +42,11 @@ public class RequestRecipe extends AsyncTask<URL, Integer, Void> {
     // allLines will read all Json strings from URL and save them into it.
     String allLines = "";
 
-
+    /**
+     * this will initialize WeakReference.
+     * @param activity
+     * @param editText
+     */
     RequestRecipe(MainActivity activity, EditText editText) {
 
         weakref = new WeakReference<MainActivity>(activity);
@@ -103,18 +106,11 @@ public class RequestRecipe extends AsyncTask<URL, Integer, Void> {
         }
 
     /**
-     * This fuction will show
-     * @param values
+     * This function will transit the app from MainActivity to Main2Activity
+     * intent will take the values of allLines and typedText
+     * @param aVoid
      */
-    protected void onProgressUpdate(Integer... values) {
-
-            if(weakref.get() != null){
-                weakref.get().pb.setProgress(values[0]);
-            }
-        }
-
-
-        protected void onPostExecute(Void aVoid) {
+    protected void onPostExecute(Void aVoid) {
 
             Intent intent = new Intent(context, Main2Activity.class);
             intent.putExtra("obj", allLines);
