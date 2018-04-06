@@ -215,8 +215,7 @@ public class Main2Activity extends AppCompatActivity {
                 HttpURLConnection connection = (HttpURLConnection) url.openConnection();
                 //gcloud API - ittcmgzIz1mshRfHT4GfOzDIgM4rp1bdJ59jsnI7kl8mVjgxCw
                 // kj API - BBB93pKWHNmshVQ2JNR0STYwPj7Xp1hdsyMjsnJbdNPTkS63hu
-                connection.setRequestProperty("X-Mashape-Key", "Z4VortkhmBmshnQP8ZDVuCWD6c6mp183oC1jsnT5HTCulZ3BDF" +
-                        "\n");
+                connection.setRequestProperty("X-Mashape-Key", "Z4VortkhmBmshnQP8ZDVuCWD6c6mp183oC1jsnT5HTCulZ3BDF");
                 connection.setRequestProperty("X-Mashape-Host", "spoonacular-recipe-food-nutrition-v1.p.mashape.com");
                 connection.setRequestMethod("GET");
 
@@ -238,6 +237,11 @@ public class Main2Activity extends AppCompatActivity {
                 } while (line != null);
 
                 Log.i("test", allLines);
+                RecipeInfo recipeInfo = gson.fromJson(allLines, RecipeInfo.class);
+                recipesInfo.add(recipeInfo);
+                url_list.add(recipeInfo.getImageURL());
+                recipe_title.add(recipeInfo.getTitle());
+                recipe_likes.add(recipeInfo.getLikes());
 
             } catch (MalformedURLException e) {
                 e.printStackTrace();
@@ -246,12 +250,13 @@ public class Main2Activity extends AppCompatActivity {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-//
-            RecipeInfo recipeInfo = gson.fromJson(allLines, RecipeInfo.class);
-            recipesInfo.add(recipeInfo);
-            url_list.add(recipeInfo.getImageURL());
-            recipe_title.add(recipeInfo.getTitle());
-            recipe_likes.add(recipeInfo.getLikes());
+
+
+//            RecipeInfo recipeInfo = gson.fromJson(allLines, RecipeInfo.class);
+//            recipesInfo.add(recipeInfo);
+//            url_list.add(recipeInfo.getImageURL());
+//            recipe_title.add(recipeInfo.getTitle());
+//            recipe_likes.add(recipeInfo.getLikes());
 
             return null;
         }
