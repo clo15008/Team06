@@ -27,20 +27,21 @@
     <EditText
         android:id="@+id/editText"
         android:layout_width="wrap_content"
-        android:layout_height="79dp"
+        android:layout_height="87dp"
         android:layout_marginBottom="8dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
         android:background="@drawable/border_v"
         android:ems="10"
-        android:inputType="textPersonName"
-        android:scrollHorizontally="false"
+        android:lines="2"
+        android:selectAllOnFocus="false"
         android:text=""
         android:textAlignment="center"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.639" />
+        app:layout_constraintVertical_bias="0.639"
+        android:inputType="textMultiLine"/>
 
     <TextView
         android:id="@+id/textView"
@@ -61,13 +62,13 @@
 
     <TextView
         android:id="@+id/textView9"
-        android:layout_width="236dp"
-        android:layout_height="90dp"
+        android:layout_width="262dp"
+        android:layout_height="89dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="124dp"
         android:alpha="0.75"
         android:fontFamily="cursive"
-        android:text="RecipeApp"
+        android:text="RecipeReady"
         android:textColor="#edc626"
         android:textSize="56sp"
         android:textStyle="bold"
