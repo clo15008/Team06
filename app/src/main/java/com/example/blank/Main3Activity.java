@@ -70,8 +70,10 @@ public class Main3Activity extends AppCompatActivity {
             String ingred = "";
             if(obj.getExtendedIngredients().length > 0) {
                 for (int i = 0; i < obj.getExtendedIngredients().length; i++) {
-                    ingred = ingred + obj.getExtendedIngredients()[i].getName() + "- " + obj.getExtendedIngredients()[i].getAmount() +
+                    ingred = ingred + obj.getExtendedIngredients()[i].getName() + "- " + convertDecimalToFraction(Double.parseDouble(obj.getExtendedIngredients()[i].getAmount())) +
                             " " + obj.getExtendedIngredients()[i].getUnit() + "\n";
+                    Log.i("Units, before: ", obj.getExtendedIngredients()[i].getAmount());
+                    Log.i("Units: ", convertDecimalToFraction(Double.parseDouble(obj.getExtendedIngredients()[i].getAmount())));
                     if (!Arrays.asList(userInput).contains(obj.getExtendedIngredients()[i].getName())) {
                         ar.add(obj.getExtendedIngredients()[i].getName());
                     }
@@ -96,7 +98,7 @@ public class Main3Activity extends AppCompatActivity {
         }
 
         // Set instructions
-        if(!obj.getInstructions().equals(null)) {
+        if(obj.getInstructions() != null) {
             String finalMod = "";
 
             // Modify contents of instructions removing excess spacing, newlines and tab characters.
@@ -136,5 +138,26 @@ public class Main3Activity extends AppCompatActivity {
 
         Toast.makeText(this, "Successfully Saved the recipe", Toast.LENGTH_SHORT).show();
     }
-}
 
+    // taken from stackoverflow user: Matthew556
+    private String convertDecimalToFraction(double x){
+        if (x < 0){
+            return "-" + convertDecimalToFraction(-x);
+        }
+        double tolerance = 1.0E-6;
+        double h1=1; double h2=0;
+        double k1=0; double k2=1;
+        double b = x;
+        do {
+            double a = Math.floor(b);
+            double aux = h1; h1 = a*h1+h2; h2 = aux;
+            aux = k1; k1 = a*k1+k2; k2 = aux;
+            b = 1/(b-a);
+        } while (Math.abs(x-h1/k1) > x*tolerance);
+
+        if(((int) k1) == 1)
+            return "" + ((int) h1);
+        else
+            return ((int) h1) + "/" + ((int) k1);
+    }
+}
