@@ -1,11 +1,8 @@
 package com.example.blank;
 
-import java.net.URL;
-
 /**
- * Created by gclou on 2/26/2018.
+ * I made this class to make a Recipe object using Json string
  */
-
 public class Recipe {
     private String id;
     private String title;
@@ -15,24 +12,34 @@ public class Recipe {
     private String missedIngredientCount;
     private String likes;
 
+    /**
+     *
+     * @return
+     */
     public String getId() {
         return id;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getTitle() {
         return title;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getImageURL() {
         return image;
     }
 
-    public String getImageType() { return imageType; }
-
-    public String getUsedIngredientCount() { return usedIngredientCount; }
-
-    public String getMissedIngredientCount() { return missedIngredientCount; }
-
+    /**
+     *
+     * @return
+     */
     public String getLikes() { return likes; }
 
 }

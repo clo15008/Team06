@@ -2,31 +2,20 @@ package com.example.blank;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.media.Image;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
-
 import android.view.View;
-import android.view.ViewGroup;
-
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.google.gson.Gson;
 import com.squareup.picasso.Picasso;
-
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 public class Main3Activity extends AppCompatActivity {
+
     // Variables
     TextView title;
     TextView ingredients;
@@ -123,9 +112,16 @@ public class Main3Activity extends AppCompatActivity {
 
     }
 
+    /**
+     * This button will save the the recipe's id number with '/' into sharedPreference so show
+     * in the user's user's favorite recipe list view
+     * @param view
+     */
     public void save_Racipe(View view){
 
+        // Added '/' to split a sequence of id lists using Split() function.
         String id = obj.getId() + '/';
+
         SharedPreferences sharedPref = getSharedPreferences(RECIPES_ID_LIST, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPref.edit();
         editor.putString(Favorite_Racepi_id, sharedPref.getString(Favorite_Racepi_id,null) + id);
