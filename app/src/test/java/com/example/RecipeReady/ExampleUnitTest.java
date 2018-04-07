@@ -1,4 +1,4 @@
-package com.example.blank;
+package com.example.RecipeReady;
 
 import org.junit.Test;
 
