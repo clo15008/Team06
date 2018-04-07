@@ -12,7 +12,7 @@ import android.widget.TextView;
 /**
  * Author: Katya
  * This activity is designed to present the first screen when a user opens the app.
- * It explains how to get a recipe by inputting names of given ingredients from user's kitchen.
+ * It explains how to get a recipe by inputting names of given ingredients from a user's kitchen.
  */
 
 public class IntroActivity extends AppCompatActivity {
@@ -20,7 +20,7 @@ public class IntroActivity extends AppCompatActivity {
     Button bt;
 
     TextView infoDisplay;
-    String content= "<p>If you want to find a recipe just simply type ingredients that you already have in your kitchen. </p>";
+    String content= "<p>If you want to find a recipe, simply type ingredients that you already have in your kitchen.</p>";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
