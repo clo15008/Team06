@@ -83,13 +83,13 @@ public class RequestRecipe extends AsyncTask<URL, Integer, Void> {
                 String line = "";
 
                 // Json to String variable, view progress bar
-                weakref.get().pb.setVisibility(View.VISIBLE);
+//                weakref.get().pb.setVisibility(View.VISIBLE);
                 do {
                     line = reader.readLine();
 
                     if (line != null) {
                         allLines += line;
-                        publishProgress(i);
+//                        publishProgress(i);
                         i++;
                     }
                 } while (line != null);
@@ -116,6 +116,7 @@ public class RequestRecipe extends AsyncTask<URL, Integer, Void> {
             intent.putExtra("obj", allLines);
             intent.putExtra("input", typedText);
             weakref.get().startActivity(intent);
+        weakref.get().pb.setVisibility(View.GONE);
 
         }
     }
