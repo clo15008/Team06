@@ -43,6 +43,15 @@ public class Main2Activity extends AppCompatActivity {
 
 
     @Override
+    /**
+     * Author: Kyungwoo Jo
+     * This onCreate will show user's favorite recipe list view if the user clicked "F.R" button on the MainActivity.
+     * If the user click the "search" button, then onCreate will show the all possible recipe list view.
+     * onCreate will distinguish whether user clicked "F.R" or "search" button by checking
+     * if the getIntent().getStringExtra("input") == null)
+     * if it is null then the onCreate will F'R list
+     * if not, the onCreate will show possible recipe list.
+     */
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
@@ -51,6 +60,7 @@ public class Main2Activity extends AppCompatActivity {
 
         Gson gson = new Gson();
 
+        // Check if user typed any ingreadients or not. If it is null, show user's favorite recipe list
         if (getIntent().getStringExtra("input") == null) {
 
             String[] id;
@@ -61,6 +71,9 @@ public class Main2Activity extends AppCompatActivity {
 
                 recipeID = id[i];
                 Log.i("recipeId", recipeID);
+
+                // Call AscynkTask which will bring the json of picture urls, titles and number of likes of the food
+                //using Food nutrition Api
                 new Request_Recipe2(Main2Activity.this).execute(recipeID);
 
             }
@@ -70,12 +83,16 @@ public class Main2Activity extends AppCompatActivity {
                 public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
                     idNumber = recipesInfo.get(i).getId();
+
+                    // Call Api which will show the specific recipe information depends on which item
+                    // the user has clicked on the view list
                     new RequestInfo(Main2Activity.this).execute();
 
                 }
             });
         }
 
+        // If user typed some ingredients, show possible recipes using the ingredients that user has typed.
         else{
 
             try {
@@ -84,9 +101,14 @@ public class Main2Activity extends AppCompatActivity {
                 JSONArray jsonarray = new JSONArray(strObj);
 
                 for (int j = 0; j < jsonarray.length(); j++) {
+
+                    // Seperate Json Array which contains all possible recipes into individual Json recipe object
                     JSONObject obj = jsonarray.getJSONObject(j);
                     Recipe recipe = gson.fromJson(obj.toString(), Recipe.class);
                     recipes.add(recipe);
+
+                    // add imageURL, Title, Like into the corresponding Array List. This will help to make
+                    // Customized recipe ListView
                     url_list.add(recipe.getImageURL());
                     recipe_title.add(recipe.getTitle());
                     recipe_likes.add(recipe.getLikes());
@@ -111,13 +133,16 @@ public class Main2Activity extends AppCompatActivity {
         }
     }
 
+    /**
+     *
+     * @return input
+     */
     public String getInput() { return input; }
 
-    public void callInfo (View view){
-
-        new Main2Activity.RequestInfo(this).execute();
-    }
-
+    /**
+     * This is a AsyncTask class which will show the specific recipe information using API with
+     * the idNumber of the food.
+     */
     private static class RequestInfo extends AsyncTask<URL,Integer,Void> {
 
         private Context context;
@@ -130,8 +155,12 @@ public class Main2Activity extends AppCompatActivity {
             weakref = new WeakReference<Main2Activity>(activity);
         }
 
-        @Override
-        protected Void doInBackground(URL... urls) {
+
+        /**
+         * this function will all the Api to get the recipe information of the specific food using
+         * Food - nutrition- Api with the idNumber of the food.
+         */
+        protected Void doInBackground(URL... uRls) {
 
             //REQUEST INFO FROM API
             try {
@@ -140,7 +169,7 @@ public class Main2Activity extends AppCompatActivity {
                 HttpURLConnection connection = (HttpURLConnection) url.openConnection();
                 //gcloud API - ittcmgzIz1mshRfHT4GfOzDIgM4rp1bdJ59jsnI7kl8mVjgxCw
                 // kj API - BBB93pKWHNmshVQ2JNR0STYwPj7Xp1hdsyMjsnJbdNPTkS63hu
-                connection.setRequestProperty("X-Mashape-Key", "ittcmgzIz1mshRfHT4GfOzDIgM4rp1bdJ59jsnI7kl8mVjgxCw");
+                connection.setRequestProperty("X-Mashape-Key", "Z4VortkhmBmshnQP8ZDVuCWD6c6mp183oC1jsnT5HTCulZ3BDF");
                 connection.setRequestProperty("X-Mashape-Host", "spoonacular-recipe-food-nutrition-v1.p.mashape.com");
                 connection.setRequestMethod("GET");
 
@@ -149,6 +178,7 @@ public class Main2Activity extends AppCompatActivity {
                 String line = "";
 
                 do {
+
                     line = reader.readLine();
 
                     if (line != null) {
@@ -157,6 +187,7 @@ public class Main2Activity extends AppCompatActivity {
                         publishProgress(i);
                         i++;
                     }
+
                 } while (line != null);
 
             } catch (MalformedURLException e) {
@@ -170,13 +201,11 @@ public class Main2Activity extends AppCompatActivity {
             return null;
         }
 
-        protected void onProgressUpdate(Integer... values){
-
-            if(weakref.get() != null){
-                //weakref.get().pb.setProgress(values[0]);
-            }
-        }
-
+        /**
+         * It will take the user from the second Activity to the Third Activity
+         * taking the string value of allLines which contains the Josn of recipe.
+         * @param aVoid
+         */
         protected void onPostExecute(Void aVoid){
             //GET INTENT
             Intent intent = new Intent(context, Main3Activity.class);
@@ -186,6 +215,10 @@ public class Main2Activity extends AppCompatActivity {
         }
     }
 
+    /**
+     * This AsyncTask will all the API to get the Json of  picture URls, titles and number of likes of the food
+     *
+     */
     public class Request_Recipe2 extends AsyncTask<String,Integer,Void> {
 
 
@@ -199,7 +232,12 @@ public class Main2Activity extends AppCompatActivity {
             weakref = new WeakReference<Main2Activity>(activity);
         }
 
-        @Override
+        /**
+         * This doInBackground will save all Json stings into allLines and turn them into recipeInfo object
+         *
+         * @param strings
+         * @return
+         */
         protected Void doInBackground(String... strings) {
 
             Gson gson = new Gson();
@@ -207,12 +245,13 @@ public class Main2Activity extends AppCompatActivity {
             //REQUEST INFO FROM API
             try {
                 int i = 0;
+                //479101
                 Log.i("check" ,strings[0]);
                 URL url = new URL("https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/" + strings[0] + "/information");
                 HttpURLConnection connection = (HttpURLConnection) url.openConnection();
                 //gcloud API - ittcmgzIz1mshRfHT4GfOzDIgM4rp1bdJ59jsnI7kl8mVjgxCw
                 // kj API - BBB93pKWHNmshVQ2JNR0STYwPj7Xp1hdsyMjsnJbdNPTkS63hu
-                connection.setRequestProperty("X-Mashape-Key", "ittcmgzIz1mshRfHT4GfOzDIgM4rp1bdJ59jsnI7kl8mVjgxCw");
+                connection.setRequestProperty("X-Mashape-Key", "Z4VortkhmBmshnQP8ZDVuCWD6c6mp183oC1jsnT5HTCulZ3BDF");
                 connection.setRequestProperty("X-Mashape-Host", "spoonacular-recipe-food-nutrition-v1.p.mashape.com");
                 connection.setRequestMethod("GET");
 
@@ -232,6 +271,8 @@ public class Main2Activity extends AppCompatActivity {
                     }
 
                 } while (line != null);
+
+                Log.i("test", allLines);
 
                 RecipeInfo recipeInfo = gson.fromJson(allLines, RecipeInfo.class);
                 recipesInfo.add(recipeInfo);
@@ -246,14 +287,15 @@ public class Main2Activity extends AppCompatActivity {
             } catch (IOException e) {
                 e.printStackTrace();
             }
+            
 
             return null;
         }
 
-        protected void onProgressUpdate(Integer... values) {
-
-        }
-
+        /**
+         * It will set a base adaptor to the list view to show all user's favorite recipes.
+         * @param aVoid
+         */
         protected void onPostExecute(Void aVoid) {
 
             lv.setAdapter( new CustomAdator());
@@ -262,9 +304,16 @@ public class Main2Activity extends AppCompatActivity {
 
     }
 
+    /**
+     * This class will make baseAdapter using picture urls, recipe titles and number of likes Array lists.
+     *
+     */
     class CustomAdator extends BaseAdapter {
 
-        @Override
+        /**
+         * This will determine how many time getView function would be called
+         * @return url_list
+         */
         public int getCount() {
 
             Log.i("urlList", Integer.toString(url_list.size()));
@@ -272,28 +321,44 @@ public class Main2Activity extends AppCompatActivity {
 
         }
 
-        @Override
+        /**
+         *
+         * @param i
+         * @return
+         */
         public Object getItem(int i) {
             return null;
         }
 
-        @Override
+        /**
+         *
+         * @param i
+         * @return
+         */
         public long getItemId(int i) {
             return 0;
         }
 
-        @Override
+        /**
+         * This will make customized listView
+         * @param i
+         * @param view
+         * @param viewGroup
+         * @return
+         */
         public View getView(int i, View view, ViewGroup viewGroup) {
             view = getLayoutInflater().inflate(R.layout.costomized_listview,null);
             ImageView imageView = (ImageView)view.findViewById(R.id.imageView);
             TextView titleText = (TextView)view.findViewById(R.id.textView_title);
             TextView likesText = (TextView)view.findViewById(R.id.textView_likes);
             Log.i("ithRecipe", Integer.toString(i) + " " + recipe_title.get(i));
-
             Picasso.with(getApplicationContext()).load(url_list.get(i)).into(imageView);
             titleText.setText(recipe_title.get(i));
             likesText.setText("likes: " + recipe_likes.get(i));
             return view;
+
         }
     }
+
+
 }
