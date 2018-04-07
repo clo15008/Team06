@@ -4,7 +4,7 @@ package com.example.RecipeReady;
  * Ingredients class holds data of a single ingredient for a selected recipe.
  *
  * @author gcloud
- *
+ * storing variables 
  */
 public class Ingredients {
     // Private variables

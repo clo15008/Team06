@@ -1,6 +1,7 @@
 package com.example.RecipeReady;
 
 /**
+ * Author: Garett
  * I made this class to make a Recipe object using Json string
  */
 public class Recipe {

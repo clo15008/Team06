@@ -38,6 +38,9 @@ import android.widget.TextView;
         textView = (TextView) findViewById(R.id.textView);
         pb = (ProgressBar) findViewById(R.id.progressBar);
 
+        pb.setVisibility(View.GONE);
+
+
     }
 
     /**
@@ -75,6 +78,7 @@ import android.widget.TextView;
      */
     public void onClick(View view) {
 
+        pb.setVisibility(View.VISIBLE);
         new RequestRecipe(this, editText).execute();
 
     }
