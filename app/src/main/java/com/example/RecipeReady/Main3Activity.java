@@ -27,8 +27,7 @@ public class Main3Activity extends AppCompatActivity {
     ArrayList<String> ar = new ArrayList<String>();
     public static final String RECIPES_ID_LIST = "USER_FAVORITE_RECIPE";
     public static final String Favorite_Racepi_id = "Favorite_Racepi_id";
-
-
+    
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
