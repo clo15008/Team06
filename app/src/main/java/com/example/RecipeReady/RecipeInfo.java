@@ -1,10 +1,4 @@
-package com.example.blank;
-
-import android.util.Log;
-
-import java.lang.reflect.Array;
-import java.net.URL;
-import java.util.ArrayList;
+package com.example.RecipeReady;
 
 /**
  * RecipeInfo recieves elements of a recipe

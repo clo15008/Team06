@@ -1,4 +1,4 @@
-package com.example.blank;
+package com.example.RecipeReady;
 
 import android.content.Context;
 import android.content.Intent;
@@ -359,6 +359,4 @@ public class Main2Activity extends AppCompatActivity {
 
         }
     }
-
-
 }

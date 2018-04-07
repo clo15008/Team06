@@ -1,6 +1,4 @@
-package com.example.blank;
-
-import java.net.URL;
+package com.example.RecipeReady;
 
 /**
  * Ingredients class holds data of a single ingredient for a selected recipe.

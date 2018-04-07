@@ -1,4 +1,4 @@
-package com.example.blank;
+package com.example.RecipeReady;
 
 /**
  * I made this class to make a Recipe object using Json string

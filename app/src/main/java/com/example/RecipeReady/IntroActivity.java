@@ -1,4 +1,4 @@
-package com.example.blank;
+package com.example.RecipeReady;
 
 import android.content.Intent;
 import android.os.Build;

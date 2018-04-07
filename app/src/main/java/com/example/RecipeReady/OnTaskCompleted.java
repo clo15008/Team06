@@ -1,4 +1,4 @@
-package com.example.blank;
+package com.example.RecipeReady;
 
 /**
  * Created by Katya on 3/12/2018.
