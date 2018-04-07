@@ -20,7 +20,7 @@ public class IntroActivity extends AppCompatActivity {
     Button bt;
 
     TextView infoDisplay;
-    String content= "<p>If you want to find a recipe just simply type ingredients that you already have in your kitchen. </p>";
+    String content= "<p>If you want to find a recipe, simply type ingredients that you already have in your kitchen.</p>";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
