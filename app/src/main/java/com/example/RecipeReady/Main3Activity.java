@@ -14,6 +14,13 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+/**
+ * Author: Garrett Cloud
+ * Main3Activity is the final activity of the app, it displayed a selected recipe's info.
+ * Info displayed involves: recipe title, picture, ingredients, missing ingredients, and
+ * instructions. If there are no instructions or missing ingredients then a message will
+ * be displayed instead stating that is it 'not found.'
+ */
 public class Main3Activity extends AppCompatActivity {
 
     // Variables
@@ -27,8 +34,12 @@ public class Main3Activity extends AppCompatActivity {
     ArrayList<String> ar = new ArrayList<String>();
     public static final String RECIPES_ID_LIST = "USER_FAVORITE_RECIPE";
     public static final String Favorite_Racepi_id = "Favorite_Racepi_id";
-    
+
     @Override
+    /**
+     * onCreate method of Main3Activity. In the onCreate method, recipe data and user
+     *   input is edited and then passed to be displayed.
+     */
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main3);
@@ -134,7 +145,12 @@ public class Main3Activity extends AppCompatActivity {
         Toast.makeText(this, "Successfully Saved the recipe", Toast.LENGTH_SHORT).show();
     }
 
-    // taken from stackoverflow user: Matthew556
+    /**
+     * taken from stackoverflow user: Matthew556
+     *
+     * @param x
+     * @return A String containing the fraction equivalent of passed in decimal number.
+     */
     private String convertDecimalToFraction(double x){
         if (x < 0){
             return "-" + convertDecimalToFraction(-x);

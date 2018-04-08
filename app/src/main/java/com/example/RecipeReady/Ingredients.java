@@ -3,10 +3,8 @@ package com.example.RecipeReady;
 import java.net.URL;
 
 /**
+ * @author Garrett Cloud
  * Ingredients class holds data of a single ingredient for a selected recipe.
- *
- * @author gcloud
- * storing variables 
  */
 public class Ingredients {
     // Private variables
